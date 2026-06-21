@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ShareShed | Neighborhood Tool Sharing Marketplace</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; background: #f2f4f7; color: #222; }
+
+  header { background: #2f5d3a; color: #fff; padding: 18px 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  header .brand { display: flex; align-items: center; gap: 12px; }
+  header .brand img { height: 45px; width: 45px; border-radius: 8px; background: #fff; }
+  header .brand h1 { font-size: 24px; }
+  header .brand p { font-size: 13px; color: #d8ecd8; }
+  header .student { text-align: right; font-size: 14px; }
+
+  nav { background: #234a2c; }
+  nav ul { display: flex; list-style: none; flex-wrap: wrap; }
+  nav ul li a { display: block; padding: 12px 20px; color: #fff; text-decoration: none; font-size: 14px; }
+  nav ul li a:hover { background: #3c7a49; }
+
+  section { padding: 30px 40px; }
+  h2 { color: #2f5d3a; margin-bottom: 15px; border-left: 5px solid #2f5d3a; padding-left: 10px; }
+
+  .welcome { background: #fff; }
+  .welcome p { margin: 8px 0; line-height: 1.6; }
+
+  .stats { display: flex; gap: 20px; flex-wrap: wrap; }
+  .stat-card { background: #fff; border-radius: 10px; padding: 20px; flex: 1; min-width: 160px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.08); border-top: 4px solid #2f5d3a; }
+  .stat-card h3 { font-size: 26px; color: #2f5d3a; }
+  .stat-card p { font-size: 14px; color: #555; margin-top: 5px; }
+
+  .features-services { display: flex; gap: 30px; flex-wrap: wrap; }
+  .features-services > div { background: #fff; padding: 20px; border-radius: 10px; flex: 1; min-width: 280px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .features-services ul, .features-services ol { padding-left: 20px; line-height: 1.8; }
+
+  marquee { background: #d9f2d0; padding: 12px; font-weight: bold; color: #2f5d3a; border-radius: 6px; }
+
+  form { background: #fff; padding: 25px; border-radius: 10px; max-width: 600px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  form label { display: block; margin-top: 12px; font-size: 14px; font-weight: bold; }
+  form input, form select, form textarea { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
+  form .radio-group { margin-top: 4px; display: flex; gap: 20px; flex-wrap: wrap; }
+  form .radio-option { display: flex; align-items: center; gap: 6px; }
+  form .radio-option input[type="radio"] { width: auto; margin: 0; }
+  form .radio-option label { display: inline; margin: 0; font-weight: normal; }
+  form .btn-row { margin-top: 20px; }
+  form button { padding: 10px 25px; margin-right: 10px; border: none; border-radius: 5px; font-size: 14px; cursor: pointer; }
+  form button[type="submit"] { background: #2f5d3a; color: #fff; }
+  form button[type="reset"] { background: #ccc; color: #222; }
+
+  table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  table th, table td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 14px; }
+  table th { background: #2f5d3a; color: #fff; }
+  table tr:nth-child(even) { background: #f7f9fb; }
+
+  .contact-info { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .contact-info p { margin: 6px 0; }
+  .contact-info a { color: #2f5d3a; text-decoration: none; margin-right: 15px; }
+
+  footer { background: #234a2c; color: #d8ecd8; text-align: center; padding: 18px; font-size: 14px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<!-- 1. HEADER -->
+<header>
+  <div class="brand">
+    <img src="a.png" alt="ShareShed Logo">
+    <div>
+      <h1>ShareShed</h1>
+      <p>Borrow Smart, Build Together</p>
+    </div>
+  </div>
+  <div class="student">
+    <p><strong>Student Name:</strong> Rooshitha Jemimah R</p>
+    <p><strong>Register Number:</strong> 2303717620522045</p>
+  </div>
+</header>
+
+<!-- 2. NAVIGATION BAR -->
+<nav>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#reports">Reports</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#logout">Logout</a></li>
+  </ul>
+</nav>
+
+<!-- 3. WELCOME SECTION -->
+<section id="home" class="welcome">
+  <h2>Welcome</h2>
+  <p>Welcome to <strong>ShareShed</strong>, a neighborhood marketplace where people lend and borrow tools instead of buying things that sit unused in a garage.</p>
+  <p><strong>Project Description:</strong> ShareShed connects neighbors so they can list spare tools (drills, ladders, lawnmowers, etc.), browse what's available nearby, and book pickup or drop-off times — all from one dashboard.</p>
+  <p><strong>Vision:</strong> A neighborhood where every tool is shared, not stored, and every household saves money while reducing waste.</p>
+  <p><strong>Mission:</strong> To make peer-to-peer tool lending simple, trustworthy, and accessible to every local community.</p>
+</section>
+
+<!-- 4. DASHBOARD STATISTICS -->
+<section id="dashboard">
+  <h2>Dashboard Statistics</h2>
+  <div class="stats">
+    <div class="stat-card"><h3>640</h3><p>Total Users</p></div>
+    <div class="stat-card"><h3>410</h3><p>Active Users</p></div>
+    <div class="stat-card"><h3>₹58,200</h3><p>Revenue</p></div>
+    <div class="stat-card"><h3>1,275</h3><p>Transactions</p></div>
+    <div class="stat-card"><h3>12</h3><p>Notifications</p></div>
+    <div class="stat-card"><h3>9</h3><p>Pending Tasks</p></div>
+  </div>
+</section>
+
+<!-- 5 & 6. FEATURES + SERVICES -->
+<section>
+  <div class="features-services">
+    <div>
+      <h2>Features</h2>
+      <ul>
+        <li>Browse tools available near your location</li>
+        <li>List your own tools for others to borrow</li>
+        <li>In-app booking calendar for pickup and return</li>
+        <li>Ratings and reviews for lenders and borrowers</li>
+        <li>Damage deposit and secure payment handling</li>
+      </ul>
+    </div>
+    <div id="services">
+      <h2>Services</h2>
+      <ol>
+        <li>Tool Listing & Cataloging</li>
+        <li>Neighborhood Search & Matching</li>
+        <li>Booking & Scheduling</li>
+        <li>Secure Payments & Deposits</li>
+        <li>Dispute Resolution & Support</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 7. LATEST UPDATES -->
+<section>
+  <h2>Latest Updates</h2>
+  <marquee behavior="scroll" direction="left" scrollamount="5">
+    🛠 New Tool Category Added: Power Tools! &nbsp;&nbsp;|&nbsp;&nbsp; 🏘 50 New Neighbors Joined This Week &nbsp;&nbsp;|&nbsp;&nbsp; 📦 Free Pickup Locker Pilot Starting 1st July 2026
+  </marquee>
+</section>
+
+<!-- 8. REGISTRATION FORM -->
+<section>
+  <h2>Registration Form</h2>
+  <form>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+    <label>Gender</label>
+    <div class="radio-group">
+      <div class="radio-option">
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label>
+      </div>
+    </div>
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" name="dob">
+
+    <label for="address">Address</label>
+    <textarea id="address" name="address" rows="3" placeholder="Enter your address (used to match nearby tools)"></textarea>
+
+    <div class="btn-row">
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </div>
+  </form>
+</section>
+
+<!-- LOGOUT SECTION -->
+<section id="logout">
+  <h2>Logout</h2>
+  <p style="margin-bottom: 15px;">You are currently signed in. Click below to securely end your session.</p>
+  <button type="button" style="padding: 10px 25px; background: #b03030; color: #fff; border: none; border-radius: 5px; font-size: 14px; cursor: pointer;">Logout</button>
+</section>
+
+<!-- 9. APPLICATION MODULES TABLE -->
+<section id="reports">
+  <h2>Application Modules</h2>
+  <table>
+    <tr>
+      <th>Module ID</th>
+      <th>Module Name</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>M01</td>
+      <td>Tool Listing Module</td>
+      <td>Lets users add, edit, and categorize tools available for sharing</td>
+    </tr>
+    <tr>
+      <td>M02</td>
+      <td>Search & Discovery Module</td>
+      <td>Helps users find tools nearby by category, distance, and availability</td>
+    </tr>
+    <tr>
+      <td>M03</td>
+      <td>Booking Module</td>
+      <td>Manages reservation requests, pickup, and return scheduling</td>
+    </tr>
+    <tr>
+      <td>M04</td>
+      <td>Payment & Deposit Module</td>
+      <td>Handles rental fees, security deposits, and refunds</td>
+    </tr>
+    <tr>
+      <td>M05</td>
+      <td>Reviews & Trust Module</td>
+      <td>Collects ratings and feedback to build lender/borrower trust</td>
+    </tr>
+  </table>
+</section>
+
+<!-- 10. CONTACT INFORMATION -->
+<section id="contact">
+  <h2>Contact Information</h2>
+  <div class="contact-info">
+    <p>📧 Email: support@shareshed.com</p>
+    <p>📞 Phone: +91 98765 43210</p>
+    <p>📍 Address: 45 Greenfield Street, Coimbatore, Tamil Nadu, India</p>
+    <p>
+      <a href="#" target="_blank">Facebook</a>
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">LinkedIn</a>
+      <a href="#" target="_blank">Twitter</a>
+    </p>
+  </div>
+</section>
+
+<!-- 11. FOOTER -->
+<footer id="about">
+  <p>© 2026 ShareShed. All Rights Reserved. | Designed by Rooshitha Jemimah R</p>
+</footer>
+
+</body>
+</html>
