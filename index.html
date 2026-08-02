@@ -3,40 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dispatch &amp; Locker | HTML5 Drag-Drop and Web Storage Demo</title>
-<meta name="description" content="An interactive demo of HTML5 Drag and Drop, Local Storage and Session Storage, styled as a shipping dispatch yard.">
+<title>ShareShed | Neighborhood Tool Sharing Marketplace</title>
+<meta name="description" content="ShareShed — borrow and lend neighborhood tools without buying things that sit unused in a garage.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ============ ICON SPRITE ============ -->
+<!-- ============ ICON SPRITE (hidden, reused via <use>) ============ -->
 <svg style="display:none">
-  <symbol id="icon-crate" viewBox="0 0 24 24"><path d="M3 8l9-4 9 4-9 4-9-4z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/><path d="M3 8v9l9 4 9-4V8" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/><path d="M12 12v9" stroke="currentColor" stroke-width="1.7" fill="none"/></symbol>
-  <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M12 7.5V12l3.2 2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="icon-pallet" viewBox="0 0 24 24"><path d="M3 9h18M3 13h18M5 9v10M12 9v10M19 9v10" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="icon-stamp" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 14l2.5 2.5L16 10.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M3 6.5l9 6.5 9-6.5" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.5 4-2 1.3a11 11 0 005.2 5.2L14 13l4 1.5v3a2 2 0 01-2 2A16 16 0 015 6a2 2 0 010-2z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.3" stroke="currentColor" stroke-width="1.7" fill="none"/></symbol>
-  <symbol id="icon-question" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M9.3 9.5a2.7 2.7 0 015.2 1c0 1.7-2.5 1.7-2.5 3.5" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor"/></symbol>
+  <symbol id="icon-shed" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.3 14.7l1.7-1.7 1 1 2.7-2.7 1 1-3.7 3.7-1-1-1.7 1.7z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="17.5" cy="9" r="2.3" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M15.7 14.2c2.4.5 3.8 2.6 3.8 5.8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M8.5 8.5h4a2 2 0 010 4h-4m0 0h5M10.5 8.5v8M8.5 12h4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-swap" viewBox="0 0 24 24"><path d="M6 7h12l-3.5-3.5M18 17H6l3.5 3.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1112 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 17a2.5 2.5 0 005 0" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M9 4V3h6v1" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M8.5 12.5l2 2 4-4.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 119.5 4 7 7 0 0020 14.5z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M3 6.5l9 6.5 9-6.5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.5 4-2 1.3a11 11 0 005.2 5.2L14 13l4 1.5v3a2 2 0 01-2 2A16 16 0 015 6a2 2 0 010-2z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8" fill="none"/></symbol>
+  <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M8 7l1.3-2.5h5.4L16 7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13.5" r="3.3" stroke="currentColor" stroke-width="1.8" fill="none"/></symbol>
+  <symbol id="icon-link" viewBox="0 0 24 24"><path d="M9 15l6-6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M11 6.5l.8-.8a4 4 0 115.5 5.5l-.8.8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M13 17.5l-.8.8a4 4 0 11-5.5-5.5l.8-.8" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-hash" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-drill" viewBox="0 0 24 24"><rect x="3" y="10" width="10" height="5" rx="1" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M13 11h4.5L20 13l-2.5 1.5H13" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 15v3" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-ladder" viewBox="0 0 24 24"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-mower" viewBox="0 0 24 24"><circle cx="7" cy="17.5" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="17" cy="17.5" r="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M7 17.5h10V11a4 4 0 00-4-4h-2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-spray" viewBox="0 0 24 24"><path d="M9 8h4l1.6-2.6h2V8h1v13H7V11a3 3 0 012-3z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.6 3.4v2" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M3 9.5h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.6-4.6 4 1.4 6-5.5-3.2-5.5 3.2 1.4-6-4.6-4 6.1-.6z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.3" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-search-pin" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M20 20l-4.3-4.3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M8 12.5l2.5 2.5 5.5-6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-power" viewBox="0 0 24 24"><path d="M12 4v7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M7 6.5a7 7 0 105 0" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M5 19c8 0 13-5 13-13-8 0-13 5-13 13z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19c2-4 5-7 9-9" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="icon-map" viewBox="0 0 24 24"><path d="M9 4L4 6v14l5-2 6 2 5-2V4l-5 2-6-2z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/><path d="M9 4v14M15 6v14" stroke="currentColor" stroke-width="1.7" fill="none"/></symbol>
+  <symbol id="icon-response" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.7" fill="none"/><rect x="13.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.7" fill="none"/><rect x="3.5" y="13.5" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.7" fill="none"/><rect x="13.5" y="13.5" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.7" fill="none"/></symbol>
+  <symbol id="icon-quote" viewBox="0 0 24 24"><path d="M7 8c-2 0-3.5 1.6-3.5 3.7C3.5 13.8 5 15 6.8 15c.3 2-1 3.6-3 4.3l.6 1.4c3-1 5.1-3.3 5.1-6.6C9.5 11 8.5 8 7 8z" fill="currentColor"/><path d="M16.5 8c-2 0-3.5 1.6-3.5 3.7 0 2.1 1.5 3.3 3.3 3.3.3 2-1 3.6-3 4.3l.6 1.4c3-1 5.1-3.3 5.1-6.6 0-3.1-1-6.1-2.5-6.1z" fill="currentColor"/></symbol>
 </svg>
 
-<!-- ============ TICKET / TOAST ============ -->
-<div class="ticket" id="ticket" role="status" aria-live="polite"></div>
+<!-- ============ TOAST (form success messages) ============ -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- ============ HEADER ============ -->
+<!-- ============ 1. HEADER ============ -->
 <header>
   <div class="brand">
-    <span class="brand-mark"><svg width="26" height="26"><use href="#icon-crate"/></svg></span>
+    <span class="brand-mark"><svg width="26" height="26"><use href="#icon-shed"/></svg></span>
     <div>
-      <h1>Dispatch &amp; Locker</h1>
-      <p class="tagline">HTML5 Drag &amp; Drop / Web Storage Yard</p>
+      <h1>ShareShed</h1>
+      <p class="tagline" id="tagline" data-full="Borrow Smart, Build Together"></p>
     </div>
   </div>
   <div class="student-card">
@@ -45,206 +71,426 @@
   </div>
 </header>
 
-<!-- ============ NAVIGATION ============ -->
+<!-- ============ 2. NAVIGATION BAR ============ -->
 <nav>
   <div class="nav-inner">
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰ Menu</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22"><use href="#icon-menu"/></svg>
+    </button>
+
     <ul id="navMenu">
       <li><a href="#home" class="nav-link active">Home</a></li>
-      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+      <li><a href="#community-stats" class="nav-link">Community Stats</a></li>
       <li><a href="#features" class="nav-link">Features</a></li>
-      <li><a href="#storage" class="nav-link">Storage</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#gallery" class="nav-link">Gallery</a></li>
+      <li><a href="#reviews" class="nav-link">Reviews</a></li>
+      <li><a href="#borrow" class="nav-link">Borrow</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
-      <li><a href="#help" class="nav-link">Help</a></li>
     </ul>
+
+    <div class="nav-utils">
+      <span class="clock" id="liveClock" aria-live="off">--:--:--</span>
+
+      <div class="notif-wrap">
+        <button class="icon-btn" id="notifBell" aria-label="Notifications" aria-expanded="false">
+          <svg width="20" height="20"><use href="#icon-bell"/></svg>
+          <span class="badge" id="notifBadge">5</span>
+        </button>
+        <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Notifications">
+          <div class="notif-head">
+            <h4>Notifications</h4>
+            <button class="text-btn" id="markAllRead">Mark all read</button>
+          </div>
+          <ul class="notif-list" id="notifList">
+            <li class="unread"><svg width="16" height="16"><use href="#icon-coin"/></svg><div><p>Booking confirmed — Bosch Drill Machine, pickup Sat 10 AM</p><time>2m ago</time></div></li>
+            <li class="unread"><svg width="16" height="16"><use href="#icon-calendar"/></svg><div><p>Return reminder — Foldable Ladder due tomorrow</p><time>1h ago</time></div></li>
+            <li class="unread"><svg width="16" height="16"><use href="#icon-star"/></svg><div><p>New review received — 5★ for your Lawnmower</p><time>3h ago</time></div></li>
+            <li class="unread"><svg width="16" height="16"><use href="#icon-pin"/></svg><div><p>Neighbor request — Pressure Washer near you</p><time>5h ago</time></div></li>
+            <li class="unread"><svg width="16" height="16"><use href="#icon-shield"/></svg><div><p>Deposit refunded — ₹500 for Paint Sprayer rental</p><time>1d ago</time></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <svg width="18" height="18"><use href="#icon-sun" id="themeIconUse"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
 
-<main>
+<!-- ============ 3. WELCOME BANNER ============ -->
+<section id="home" class="welcome reveal pegboard">
+  <div class="welcome-inner">
+    <span class="eyebrow">Neighborhood marketplace</span>
+    <h2 class="hero-title">Welcome to ShareShed</h2>
+    <p class="lede">A neighborhood marketplace where people lend and borrow tools instead of buying things that sit unused in a garage.</p>
 
-  <!-- ============ HOME / INTRODUCTION ============ -->
-  <section id="home" class="crate-strip">
-    <span class="eyebrow">Assignment 04</span>
-    <h2>Welcome to the Dispatch Yard</h2>
-    <article>
-      <p class="lede">This page is a working yard for two HTML5 features: <strong>Drag and Drop</strong> and
-      <strong>Web Storage</strong>. Crates represent pieces of data. Drag one onto the pallet to see the Drag and
-      Drop API in action, then head to the Storage dock to file information into the Long-Term Locker
-      (<code>localStorage</code>) or a Temporary Crate (<code>sessionStorage</code>).</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Project Description</h4>
+        <p>ShareShed connects neighbors so they can list spare tools — drills, ladders, lawnmowers and more — browse what's available nearby, and book pickup or drop-off times, all from one dashboard.</p>
+      </div>
+      <div class="info-card">
+        <h4>Vision</h4>
+        <p>A neighborhood where every tool is shared, not stored, and every household saves money while reducing waste.</p>
+      </div>
+      <div class="info-card">
+        <h4>Mission</h4>
+        <p>To make peer-to-peer tool lending simple, trustworthy, and accessible to every local community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. DASHBOARD ============ -->
+<section id="dashboard" class="reveal">
+  <span class="eyebrow">Your overview</span>
+  <h2>Dashboard</h2>
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-icon"><svg width="20" height="20"><use href="#icon-users"/></svg></span>
+      <h3 data-target="640" data-prefix="">0</h3>
+      <p>Total Users</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon"><svg width="20" height="20"><use href="#icon-power"/></svg></span>
+      <h3 data-target="410" data-prefix="">0</h3>
+      <p>Active Users</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon"><svg width="20" height="20"><use href="#icon-coin"/></svg></span>
+      <h3 data-target="58200" data-prefix="₹">₹0</h3>
+      <p>Revenue</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon"><svg width="20" height="20"><use href="#icon-swap"/></svg></span>
+      <h3 data-target="1275" data-prefix="">0</h3>
+      <p>Transactions</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon"><svg width="20" height="20"><use href="#icon-bell"/></svg></span>
+      <h3 data-target="12" data-prefix="">0</h3>
+      <p>Notifications</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon"><svg width="20" height="20"><use href="#icon-clipboard"/></svg></span>
+      <h3 data-target="9" data-prefix="">0</h3>
+      <p>Pending Tasks</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. COMMUNITY STATISTICS ============ -->
+<section id="community-stats" class="reveal">
+  <span class="eyebrow">The bigger picture</span>
+  <h2>Community Statistics</h2>
+
+  <div class="progress-block">
+    <div class="progress-label"><span>Tool Utilization</span><span class="progress-pct" data-target="78">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" data-target="78"></div></div>
+  </div>
+
+  <div class="community-grid">
+    <div class="community-card">
+      <span class="community-icon"><svg width="20" height="20"><use href="#icon-swap"/></svg></span>
+      <h3 data-target="312" data-prefix="">0</h3>
+      <p>Tools Shared This Month</p>
+    </div>
+    <div class="community-card">
+      <span class="community-icon"><svg width="20" height="20"><use href="#icon-map"/></svg></span>
+      <h3 data-target="27" data-prefix="">0</h3>
+      <p>Neighborhoods Active</p>
+    </div>
+    <div class="community-card">
+      <span class="community-icon"><svg width="20" height="20"><use href="#icon-response"/></svg></span>
+      <h3 data-target="18" data-prefix="" data-suffix=" min">0</h3>
+      <p>Average Response Time</p>
+    </div>
+    <div class="community-card">
+      <span class="community-icon"><svg width="20" height="20"><use href="#icon-leaf"/></svg></span>
+      <h3 data-target="4600" data-prefix="" data-suffix=" kg">0</h3>
+      <p>Waste Avoided (est.)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. FEATURES SECTION ============ -->
+<section id="features" class="reveal">
+  <span class="eyebrow">Why ShareShed</span>
+  <h2>Platform Features</h2>
+  <div class="card-grid">
+    <div class="feature-card">
+      <span class="feature-icon"><svg width="22" height="22"><use href="#icon-search-pin"/></svg></span>
+      <h4>Browse Nearby</h4>
+      <p>Browse tools available near your location, sorted by distance.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon"><svg width="22" height="22"><use href="#icon-shed"/></svg></span>
+      <h4>List Your Tools</h4>
+      <p>List your own tools for others to borrow in just a few taps.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon"><svg width="22" height="22"><use href="#icon-calendar"/></svg></span>
+      <h4>Booking Calendar</h4>
+      <p>In-app booking calendar for pickup and return scheduling.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon"><svg width="22" height="22"><use href="#icon-star"/></svg></span>
+      <h4>Ratings & Reviews</h4>
+      <p>Ratings and reviews for both lenders and borrowers.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon"><svg width="22" height="22"><use href="#icon-shield"/></svg></span>
+      <h4>Secure Deposits</h4>
+      <p>Damage deposit and secure payment handling, built in.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. SERVICES SECTION ============ -->
+<section id="services" class="reveal">
+  <span class="eyebrow">What we offer</span>
+  <h2>Services</h2>
+  <div class="card-grid services-grid">
+    <div class="service-card"><span class="service-no">01</span><h4>Tool Listing & Cataloging</h4><p>Organize every tool by category, condition and availability.</p></div>
+    <div class="service-card"><span class="service-no">02</span><h4>Neighborhood Search & Matching</h4><p>Find what you need from people a few streets away.</p></div>
+    <div class="service-card"><span class="service-no">03</span><h4>Booking & Scheduling</h4><p>Reserve pickup and return windows that fit both sides.</p></div>
+    <div class="service-card"><span class="service-no">04</span><h4>Secure Payments & Deposits</h4><p>Rental fees and damage deposits, handled and refunded fairly.</p></div>
+    <div class="service-card"><span class="service-no">05</span><h4>Dispute Resolution & Support</h4><p>A human-backed support flow when something goes wrong.</p></div>
+  </div>
+</section>
+
+<!-- ============ 8. FEATURED TOOLS SLIDER ============ -->
+<section class="reveal">
+  <span class="eyebrow">Borrow this week</span>
+  <h2>Featured Tools Slider</h2>
+  <div class="slider" id="slider">
+    <div class="slides" id="slides">
+      <article class="slide active slide--power">
+        <svg width="40" height="40"><use href="#icon-drill"/></svg>
+        <h3>Power Tools</h3>
+        <p>Drills, sanders & saws ready to borrow this weekend.</p>
+      </article>
+      <article class="slide slide--ladder">
+        <svg width="40" height="40"><use href="#icon-ladder"/></svg>
+        <h3>Ladders & Access</h3>
+        <p>Reach higher without buying something for one job.</p>
+      </article>
+      <article class="slide slide--garden">
+        <svg width="40" height="40"><use href="#icon-mower"/></svg>
+        <h3>Garden & Lawn</h3>
+        <p>Mowers, trimmers and rakes from three streets away.</p>
+      </article>
+      <article class="slide slide--paint">
+        <svg width="40" height="40"><use href="#icon-spray"/></svg>
+        <h3>Paint & Finish</h3>
+        <p>Sprayers and rollers for your next touch-up.</p>
+      </article>
+    </div>
+    <button class="slide-btn prev" id="prevSlide" aria-label="Previous slide"><svg width="20" height="20"><use href="#icon-chevron-left"/></svg></button>
+    <button class="slide-btn next" id="nextSlide" aria-label="Next slide"><svg width="20" height="20"><use href="#icon-chevron-right"/></svg></button>
+    <div class="dots" id="slideDots"></div>
+  </div>
+</section>
+
+<!-- ============ LATEST UPDATES TICKER ============ -->
+<section class="reveal">
+  <h2>Latest Updates</h2>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>🛠 New Tool Category Added: Power Tools!</span>
+      <span>🏘 50 New Neighbors Joined This Week</span>
+      <span>📦 Free Pickup Locker Pilot Starting 1st July 2026</span>
+      <span>🛠 New Tool Category Added: Power Tools!</span>
+      <span>🏘 50 New Neighbors Joined This Week</span>
+      <span>📦 Free Pickup Locker Pilot Starting 1st July 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. TOOL GALLERY ============ -->
+<section id="gallery" class="reveal">
+  <span class="eyebrow">Browse the shed</span>
+  <h2>Tool Gallery</h2>
+
+  <div class="gallery-filters" id="galleryFilters">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="power">Power Tools</button>
+    <button class="filter-chip" data-filter="garden">Garden</button>
+    <button class="filter-chip" data-filter="access">Access</button>
+    <button class="filter-chip" data-filter="paint">Paint & Finish</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <article class="tool-card" data-category="power">
+      <div class="tool-thumb tool-thumb--power"><svg width="34" height="34"><use href="#icon-drill"/></svg></div>
+      <h4>Bosch Drill Machine</h4>
+      <p class="tool-meta">Power Tools · ₹80/day</p>
+      <span class="tool-status status-available">Available</span>
     </article>
-  </section>
+    <article class="tool-card" data-category="access">
+      <div class="tool-thumb tool-thumb--access"><svg width="34" height="34"><use href="#icon-ladder"/></svg></div>
+      <h4>Foldable Ladder (8ft)</h4>
+      <p class="tool-meta">Access · ₹60/day</p>
+      <span class="tool-status status-booked">Booked</span>
+    </article>
+    <article class="tool-card" data-category="garden">
+      <div class="tool-thumb tool-thumb--garden"><svg width="34" height="34"><use href="#icon-mower"/></svg></div>
+      <h4>Electric Lawnmower</h4>
+      <p class="tool-meta">Garden · ₹150/day</p>
+      <span class="tool-status status-available">Available</span>
+    </article>
+    <article class="tool-card" data-category="paint">
+      <div class="tool-thumb tool-thumb--paint"><svg width="34" height="34"><use href="#icon-spray"/></svg></div>
+      <h4>Paint Sprayer</h4>
+      <p class="tool-meta">Paint & Finish · ₹120/day</p>
+      <span class="tool-status status-available">Available</span>
+    </article>
+    <article class="tool-card" data-category="power">
+      <div class="tool-thumb tool-thumb--power"><svg width="34" height="34"><use href="#icon-drill"/></svg></div>
+      <h4>Cordless Angle Grinder</h4>
+      <p class="tool-meta">Power Tools · ₹90/day</p>
+      <span class="tool-status status-available">Available</span>
+    </article>
+    <article class="tool-card" data-category="garden">
+      <div class="tool-thumb tool-thumb--garden"><svg width="34" height="34"><use href="#icon-mower"/></svg></div>
+      <h4>Petrol Hedge Trimmer</h4>
+      <p class="tool-meta">Garden · ₹100/day</p>
+      <span class="tool-status status-booked">Booked</span>
+    </article>
+    <article class="tool-card" data-category="access">
+      <div class="tool-thumb tool-thumb--access"><svg width="34" height="34"><use href="#icon-ladder"/></svg></div>
+      <h4>Telescopic Ladder (12ft)</h4>
+      <p class="tool-meta">Access · ₹90/day</p>
+      <span class="tool-status status-available">Available</span>
+    </article>
+    <article class="tool-card" data-category="paint">
+      <div class="tool-thumb tool-thumb--paint"><svg width="34" height="34"><use href="#icon-spray"/></svg></div>
+      <h4>Roller & Tray Set</h4>
+      <p class="tool-meta">Paint & Finish · ₹40/day</p>
+      <span class="tool-status status-available">Available</span>
+    </article>
+  </div>
+  <p class="gallery-empty" id="galleryEmpty" hidden>No tools match this filter yet.</p>
+</section>
 
-  <!-- ============ ABOUT ============ -->
-  <section id="about">
-    <span class="eyebrow">About this build</span>
-    <h2>What's on the manifest</h2>
-    <div class="about-grid">
-      <article class="manifest-card">
-        <h4>Course Outcomes</h4>
-        <p>Design interactive pages with semantic HTML5, implement native Drag and Drop, and persist data with
-        Local and Session Storage — all inside one clean, responsive layout.</p>
-      </article>
-      <aside class="manifest-card manifest-aside">
-        <h4>How the metaphor maps</h4>
-        <ul>
-          <li><strong>Crate</strong> → a draggable HTML5 element</li>
-          <li><strong>Pallet</strong> → the drop target zone</li>
-          <li><strong>Long-Term Locker</strong> → <code>localStorage</code></li>
-          <li><strong>Temporary Crate</strong> → <code>sessionStorage</code></li>
-        </ul>
-      </aside>
+<!-- ============ 10. MEMBER REVIEWS ============ -->
+<section id="reviews" class="reveal">
+  <span class="eyebrow">Trusted by neighbors</span>
+  <h2>Member Reviews</h2>
+  <div class="reviews-grid">
+    <article class="review-card">
+      <span class="review-quote"><svg width="26" height="26"><use href="#icon-quote"/></svg></span>
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p>"Borrowed a ladder for one weekend job and saved myself buying something I'd use once a year. Pickup was five minutes from home."</p>
+      <div class="review-author">
+        <span class="avatar">AK</span>
+        <div><strong>Arjun K.</strong><span>Borrower · Coimbatore</span></div>
+      </div>
+    </article>
+    <article class="review-card">
+      <span class="review-quote"><svg width="26" height="26"><use href="#icon-quote"/></svg></span>
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p>"My drill sits unused most of the year — now it earns a little extra and I get to meet neighbors I'd never have spoken to otherwise."</p>
+      <div class="review-author">
+        <span class="avatar">SM</span>
+        <div><strong>Sandhya M.</strong><span>Lender · Coimbatore</span></div>
+      </div>
+    </article>
+    <article class="review-card">
+      <span class="review-quote"><svg width="26" height="26"><use href="#icon-quote"/></svg></span>
+      <div class="review-stars" aria-label="4 out of 5 stars">★★★★☆</div>
+      <p>"Booking calendar made scheduling the return simple, and the deposit was refunded the same evening. Would like more garden tools listed."</p>
+      <div class="review-author">
+        <span class="avatar">RP</span>
+        <div><strong>Rahul P.</strong><span>Borrower · Coimbatore</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 11. TOOL BORROW REQUEST FORM ============ -->
+<section id="borrow" class="reveal">
+  <span class="eyebrow">Request a tool</span>
+  <h2>Tool Borrow Request Form</h2>
+  <form id="borrowForm" novalidate>
+    <label for="borrowerName">Your Name</label>
+    <input type="text" id="borrowerName" name="borrowerName" placeholder="Enter your full name">
+    <span class="field-error" id="borrowerNameError"></span>
+
+    <label for="borrowerEmail">Email</label>
+    <input type="email" id="borrowerEmail" name="borrowerEmail" placeholder="Enter your email">
+    <span class="field-error" id="borrowerEmailError"></span>
+
+    <label for="toolNeeded">Tool Needed</label>
+    <select id="toolNeeded" name="toolNeeded">
+      <option value="">Select a tool</option>
+      <option value="drill">Bosch Drill Machine</option>
+      <option value="ladder">Foldable Ladder (8ft)</option>
+      <option value="mower">Electric Lawnmower</option>
+      <option value="sprayer">Paint Sprayer</option>
+      <option value="grinder">Cordless Angle Grinder</option>
+      <option value="trimmer">Petrol Hedge Trimmer</option>
+    </select>
+    <span class="field-error" id="toolNeededError"></span>
+
+    <div class="form-row">
+      <div>
+        <label for="pickupDate">Pickup Date</label>
+        <input type="date" id="pickupDate" name="pickupDate">
+        <span class="field-error" id="pickupDateError"></span>
+      </div>
+      <div>
+        <label for="returnDate">Return Date</label>
+        <input type="date" id="returnDate" name="returnDate">
+        <span class="field-error" id="returnDateError"></span>
+      </div>
     </div>
-  </section>
 
-  <!-- ============ FEATURES ============ -->
-  <section id="features">
-    <span class="eyebrow">Yard equipment</span>
-    <h2>Features</h2>
-    <div class="feature-grid">
-      <article class="feature-card">
-        <span class="feature-icon"><svg width="20" height="20"><use href="#icon-crate"/></svg></span>
-        <h4>Draggable Crates</h4>
-        <p>Colour-coded boxes built with the <code>draggable</code> attribute.</p>
-      </article>
-      <article class="feature-card">
-        <span class="feature-icon"><svg width="20" height="20"><use href="#icon-pallet"/></svg></span>
-        <h4>Drop Pallet</h4>
-        <p>A dedicated zone listening for <code>dragover</code> and <code>drop</code>.</p>
-      </article>
-      <article class="feature-card">
-        <span class="feature-icon"><svg width="20" height="20"><use href="#icon-lock"/></svg></span>
-        <h4>Long-Term Locker</h4>
-        <p>Details saved with <code>localStorage</code> survive a full browser restart.</p>
-      </article>
-      <article class="feature-card">
-        <span class="feature-icon"><svg width="20" height="20"><use href="#icon-clock"/></svg></span>
-        <h4>Temporary Crate</h4>
-        <p>Details saved with <code>sessionStorage</code> clear once the tab closes.</p>
-      </article>
+    <label for="borrowMessage">Message to Lender (optional)</label>
+    <textarea id="borrowMessage" name="borrowMessage" rows="3" placeholder="Anything the lender should know?"></textarea>
+
+    <div class="btn-row">
+      <button type="submit" class="btn btn-primary">Submit Request</button>
+      <button type="reset" class="btn btn-secondary">Reset</button>
     </div>
-  </section>
+  </form>
+</section>
 
-  <!-- ============ DRAG & DROP ZONE ============ -->
-  <section id="dragdrop">
-    <span class="eyebrow">Loading dock</span>
-    <h2>Drag a Crate onto the Pallet</h2>
-
-    <div class="dock-layout">
-      <article class="dock-source">
-        <h4>Crate Rack</h4>
-        <p class="dock-hint">Pick up a crate and drag it onto the pallet on the right.</p>
-        <div class="crate-rack">
-          <div class="crate crate--orange" draggable="true" data-crate="Fragile Goods">
-            <svg width="22" height="22"><use href="#icon-crate"/></svg>Fragile Goods
-          </div>
-          <div class="crate crate--teal" draggable="true" data-crate="Spare Parts">
-            <svg width="22" height="22"><use href="#icon-crate"/></svg>Spare Parts
-          </div>
-          <div class="crate crate--red" draggable="true" data-crate="Perishables">
-            <svg width="22" height="22"><use href="#icon-crate"/></svg>Perishables
-          </div>
-        </div>
-      </article>
-
-      <article class="dock-target">
-        <h4>Pallet <span class="pallet-count" id="palletCount">0 loaded</span></h4>
-        <div class="pallet" id="palletZone">
-          <p class="pallet-placeholder" id="palletPlaceholder">Drop crates here</p>
-        </div>
-        <button type="button" class="btn btn-secondary" id="clearPalletBtn">Clear Pallet</button>
-      </article>
+<!-- ============ CONTACT INFORMATION ============ -->
+<section id="contact" class="reveal">
+  <span class="eyebrow">Get in touch</span>
+  <h2>Contact</h2>
+  <div class="contact-info">
+    <p><svg width="18" height="18"><use href="#icon-mail"/></svg> support@shareshed.com</p>
+    <p><svg width="18" height="18"><use href="#icon-phone"/></svg> +91 98765 43210</p>
+    <p><svg width="18" height="18"><use href="#icon-pin"/></svg> 45 Greenfield Street, Coimbatore, Tamil Nadu, India</p>
+    <div class="social-row">
+      <a href="#" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#icon-chat"/></svg>Facebook</a>
+      <a href="#" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#icon-camera"/></svg>Instagram</a>
+      <a href="#" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#icon-link"/></svg>LinkedIn</a>
+      <a href="#" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#icon-hash"/></svg>Twitter</a>
     </div>
-
-    <aside class="dock-tip">
-      <svg width="18" height="18"><use href="#icon-stamp"/></svg>
-      <p>Under the hood: <code>dragstart</code> stores the crate name in <code>dataTransfer</code>,
-      <code>dragover</code> calls <code>preventDefault()</code> to allow dropping, and <code>drop</code> reads the
-      data back and stamps it onto the pallet's manifest.</p>
-    </aside>
-  </section>
-
-  <!-- ============ WEB STORAGE ============ -->
-  <section id="storage">
-    <span class="eyebrow">Filing office</span>
-    <h2>Local &amp; Session Storage</h2>
-
-    <div class="storage-layout">
-      <article class="storage-form-card">
-        <h4>File your details</h4>
-        <form id="storageForm">
-          <label for="visitorName">Name</label>
-          <input type="text" id="visitorName" placeholder="Enter your name">
-
-          <label for="visitorNote">Note</label>
-          <input type="text" id="visitorNote" placeholder="A short note to store">
-
-          <div class="btn-row">
-            <button type="button" class="btn btn-primary" id="saveLocalBtn">
-              <svg width="16" height="16"><use href="#icon-lock"/></svg> Save to Long-Term Locker
-            </button>
-            <button type="button" class="btn btn-teal" id="saveSessionBtn">
-              <svg width="16" height="16"><use href="#icon-clock"/></svg> Save to Temporary Crate
-            </button>
-          </div>
-        </form>
-      </article>
-
-      <aside class="storage-readout-card">
-        <h4>Locker Readout</h4>
-        <div class="readout" id="storageReadout">
-          <p class="readout-empty">Nothing retrieved yet. Use the buttons below.</p>
-        </div>
-        <div class="btn-row">
-          <button type="button" class="btn btn-secondary" id="retrieveBtn">Retrieve Stored Data</button>
-          <button type="button" class="btn btn-danger" id="clearStorageBtn">Clear Stored Data</button>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section id="contact">
-    <span class="eyebrow">Yard office</span>
-    <h2>Contact Information</h2>
-    <div class="contact-info">
-      <p><svg width="18" height="18"><use href="#icon-mail"/></svg> support@dispatchlocker.edu</p>
-      <p><svg width="18" height="18"><use href="#icon-phone"/></svg> +91 98765 43210</p>
-      <p><svg width="18" height="18"><use href="#icon-pin"/></svg> Department of Computer Applications, Coimbatore, Tamil Nadu, India</p>
-    </div>
-  </section>
-
-  <!-- ============ HELP ============ -->
-  <section id="help">
-    <span class="eyebrow">Need a hand</span>
-    <h2>Help</h2>
-    <div class="help-grid">
-      <article class="help-card">
-        <span class="help-icon"><svg width="18" height="18"><use href="#icon-question"/></svg></span>
-        <h4>Crate won't drag?</h4>
-        <p>Make sure you click and hold directly on a crate, then move the mouse before releasing over the pallet.</p>
-      </article>
-      <article class="help-card">
-        <span class="help-icon"><svg width="18" height="18"><use href="#icon-question"/></svg></span>
-        <h4>What's the difference between the lockers?</h4>
-        <p>The Long-Term Locker (localStorage) keeps data after you close the browser. The Temporary Crate
-        (sessionStorage) empties out once the tab is closed.</p>
-      </article>
-      <article class="help-card">
-        <span class="help-icon"><svg width="18" height="18"><use href="#icon-question"/></svg></span>
-        <h4>How do I remove saved data?</h4>
-        <p>Use the "Clear Stored Data" button in the Filing Office section to wipe both lockers at once.</p>
-      </article>
-    </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <!-- ============ FOOTER ============ -->
 <footer>
-  <p>&copy; 2026 Dispatch &amp; Locker. All Rights Reserved.</p>
-  <p>Rooshitha Jemimah R &middot; Department of Computer Applications</p>
-  <p>support@dispatchlocker.edu &middot; +91 98765 43210</p>
+  <p>© 2026 ShareShed. All Rights Reserved. | Designed by Rooshitha Jemimah R</p>
+  <div class="footer-social">
+    <a href="#" aria-label="Facebook"><svg width="16" height="16"><use href="#icon-chat"/></svg></a>
+    <a href="#" aria-label="Instagram"><svg width="16" height="16"><use href="#icon-camera"/></svg></a>
+    <a href="#" aria-label="LinkedIn"><svg width="16" height="16"><use href="#icon-link"/></svg></a>
+    <a href="#" aria-label="Twitter"><svg width="16" height="16"><use href="#icon-hash"/></svg></a>
+  </div>
 </footer>
+
+<!-- ============ BACK TO TOP BUTTON ============ -->
+<button class="scroll-top" id="scrollTopBtn" aria-label="Back to top">
+  <svg width="20" height="20"><use href="#icon-arrow-up"/></svg>
+</button>
 
 <script src="script.js" defer></script>
 </body>
