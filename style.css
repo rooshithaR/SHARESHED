@@ -567,3 +567,81 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
 @media (max-width: 760px) {
   .typing-heading { white-space: normal; border-right: none; animation: fadeInDemo 1s ease both; max-width: 100%; }
 }
+
+/* =========================================================
+   APPLIED TO THE REAL APPLICATION
+   (appended only — every rule above this line is untouched;
+   these rules extend the actual site's cards, icons and buttons
+   with the same transform/animation techniques from the demo)
+   ========================================================= */
+
+/* ---------- Fade-In: real cards & panels reveal as you scroll to them ---------- */
+.feature-card, .gallery-card, .help-card, .manifest-card, .review-card,
+.slide-card, .stat-card, .dock-source, .dock-target,
+.storage-form-card, .storage-readout-card, .contact-info {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.feature-card.is-revealed, .gallery-card.is-revealed, .help-card.is-revealed,
+.manifest-card.is-revealed, .review-card.is-revealed, .slide-card.is-revealed,
+.stat-card.is-revealed, .dock-source.is-revealed, .dock-target.is-revealed,
+.storage-form-card.is-revealed, .storage-readout-card.is-revealed, .contact-info.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Card Hover Animation: lift + scale + tilt on the real cards ---------- */
+.feature-card:hover, .gallery-card:hover, .help-card:hover, .manifest-card:hover,
+.review-card:hover, .slide-card:hover, .stat-card:hover {
+  transform: translateY(-8px) scale(1.025) rotate(-0.5deg);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--teal);
+}
+
+/* ---------- rotate(): real icons tilt when their card is hovered ---------- */
+.feature-icon, .gallery-icon, .help-icon, .slide-icon {
+  transition: transform 0.35s ease, background 0.3s ease;
+}
+.feature-card:hover .feature-icon,
+.gallery-card:hover .gallery-icon,
+.help-card:hover .help-icon,
+.slide-card:hover .slide-icon {
+  transform: rotate(10deg) scale(1.12);
+}
+
+/* ---------- skew(): eyebrow tags get a stamp-like wobble on hover ---------- */
+.eyebrow { transition: transform 0.3s ease; }
+.eyebrow:hover { transform: rotate(-1.2deg) skew(-8deg, 3deg); }
+
+/* ---------- translate(): Back to Top lifts further on hover ---------- */
+.back-to-top:hover { transform: translateY(-6px); }
+
+/* ---------- scale(): a crate shrinks slightly while it's being picked up ---------- */
+.crate.dragging { transform: scale(0.92); }
+
+/* ---------- Bounce: the crate hops back into place once you let go ---------- */
+@keyframes crateHop {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-14px); }
+  50% { transform: translateY(0); }
+  70% { transform: translateY(-7px); }
+  85% { transform: translateY(0); }
+}
+.crate.bounce-hop { animation: crateHop 0.7s ease; }
+
+/* ---------- Zoom: a Tool Gallery card zooms briefly when you pick it ---------- */
+@keyframes toolZoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+.gallery-card.zoom-pick { animation: toolZoom 0.45s ease; }
+
+/* ---------- Pulse: the real Submit Request button calls for attention ---------- */
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 106, 42, 0.5); }
+  70% { box-shadow: 0 0 0 13px rgba(212, 106, 42, 0); }
+}
+#borrowForm button[type="submit"] { animation: ctaPulse 2.4s ease-out infinite; }
+#borrowForm button[type="submit"]:hover { animation-play-state: paused; }
