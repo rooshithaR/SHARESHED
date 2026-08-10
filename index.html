@@ -384,78 +384,177 @@
   </section>
 
   <!-- ============ TRANSFORMS & ANIMATIONS SHOWCASE ============ -->
-  <section id="transforms-animations">
-    <span class="eyebrow">Rigging demo</span>
-    <h2>Transforms &amp; Animations</h2>
-    <p class="showcase-intro">A quick reference of CSS <code>transform</code> functions and keyframe animations,
-    demonstrated on crate icons and cards. Hover a transform card to trigger it.</p>
+ ```html
+<section id="things-to-borrow">
+  <span class="eyebrow">Available Now</span>
 
-    <div class="transform-grid">
-      <article class="transform-card transform-card--translate">
-        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
-        <h4>translate()</h4>
-        <p>Shifts the crate along X and Y — <code>translate(28px, -10px)</code></p>
-      </article>
-      <article class="transform-card transform-card--rotate">
-        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
-        <h4>rotate()</h4>
-        <p>Spins the crate around its centre — <code>rotate(45deg)</code></p>
-      </article>
-      <article class="transform-card transform-card--scale">
-        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
-        <h4>scale()</h4>
-        <p>Grows the crate in place — <code>scale(1.45)</code></p>
-      </article>
-      <article class="transform-card transform-card--skew">
-        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
-        <h4>skew()</h4>
-        <p>Slants the crate on both axes — <code>skew(-14deg, 6deg)</code></p>
-      </article>
-    </div>
+  <h2>Things Available to Borrow Now</h2>
 
-    <div class="animation-grid">
-      <article class="anim-card">
-        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--fade"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
-        <h4>Fade-In</h4>
-        <p>Opacity animates between 0 and 1 on a loop.</p>
-      </article>
-      <article class="anim-card">
-        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--bounce"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
-        <h4>Bounce</h4>
-        <p>Keyframes step the icon up and down like a dropped crate.</p>
-      </article>
-      <article class="anim-card">
-        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--zoom"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
-        <h4>Zoom</h4>
-        <p>Scale pulses larger then back to normal size.</p>
-      </article>
-      <article class="anim-card">
-        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--pulse"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
-        <h4>Pulse</h4>
-        <p>An expanding box-shadow ring, like a radar ping.</p>
-      </article>
-    </div>
+  <p class="showcase-intro">
+    Browse tools and useful items that are currently available to borrow.
+    Hover over an item to see its animation.
+  </p>
 
-    <div class="hover-card-grid">
-      <article class="hover-demo-card">
-        <span class="hover-icon"><svg width="20" height="20"><use href="#icon-crate"/></svg></span>
-        <h4>Card Hover Animation</h4>
-        <p>Hover to lift, tilt and re-tint this card.</p>
-      </article>
-      <article class="hover-demo-card">
-        <span class="hover-icon"><svg width="20" height="20"><use href="#icon-pallet"/></svg></span>
-        <h4>Card Hover Animation</h4>
-        <p>Hover to lift, tilt and re-tint this card.</p>
-      </article>
-      <article class="hover-demo-card">
-        <span class="hover-icon"><svg width="20" height="20"><use href="#icon-lock"/></svg></span>
-        <h4>Card Hover Animation</h4>
-        <p>Hover to lift, tilt and re-tint this card.</p>
-      </article>
-    </div>
-  </section>
+  <div class="transform-grid">
 
+    <article class="transform-card transform-card--translate">
+      <div class="transform-stage">
+        <div class="transform-crate">
+          <svg width="26" height="26">
+            <use href="#icon-tools"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Hand Tools</h4>
+      <p>Hammers, screwdrivers and other basic tools available for borrowing.</p>
+    </article>
+
+    <article class="transform-card transform-card--rotate">
+      <div class="transform-stage">
+        <div class="transform-crate">
+          <svg width="26" height="26">
+            <use href="#icon-drill"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Power Drill</h4>
+      <p>Borrow a power drill for drilling and basic DIY work.</p>
+    </article>
+
+    <article class="transform-card transform-card--scale">
+      <div class="transform-stage">
+        <div class="transform-crate">
+          <svg width="26" height="26">
+            <use href="#icon-ladder"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Ladder</h4>
+      <p>A sturdy ladder available for short-term household or maintenance work.</p>
+    </article>
+
+    <article class="transform-card transform-card--skew">
+      <div class="transform-stage">
+        <div class="transform-crate">
+          <svg width="26" height="26">
+            <use href="#icon-toolbox"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Toolbox</h4>
+      <p>A complete toolbox with essential tools ready to borrow.</p>
+    </article>
+
+  </div>
+
+  <div class="animation-grid">
+
+    <article class="anim-card">
+      <div class="anim-icon-wrap">
+        <div class="anim-icon anim-icon--fade">
+          <svg width="22" height="22">
+            <use href="#icon-hammer"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Hammer</h4>
+      <p>Available now for basic repair, construction and DIY tasks.</p>
+    </article>
+
+    <article class="anim-card">
+      <div class="anim-icon-wrap">
+        <div class="anim-icon anim-icon--bounce">
+          <svg width="22" height="22">
+            <use href="#icon-screwdriver"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Screwdriver Set</h4>
+      <p>A set of screwdrivers available for borrowing.</p>
+    </article>
+
+    <article class="anim-card">
+      <div class="anim-icon-wrap">
+        <div class="anim-icon anim-icon--zoom">
+          <svg width="22" height="22">
+            <use href="#icon-wrench"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Wrench Set</h4>
+      <p>Useful for tightening and loosening nuts and bolts.</p>
+    </article>
+
+    <article class="anim-card">
+      <div class="anim-icon-wrap">
+        <div class="anim-icon anim-icon--pulse">
+          <svg width="22" height="22">
+            <use href="#icon-measuring-tape"/>
+          </svg>
+        </div>
+      </div>
+      <h4>Measuring Tape</h4>
+      <p>Available for measuring furniture, rooms and project materials.</p>
+    </article>
+
+  </div>
+
+  <div class="hover-card-grid">
+
+    <article class="hover-demo-card">
+      <span class="hover-icon">
+        <svg width="20" height="20">
+          <use href="#icon-hammer"/>
+        </svg>
+      </span>
+      <h4>Hammer</h4>
+      <p>Available to borrow now.</p>
+    </article>
+
+    <article class="hover-demo-card">
+      <span class="hover-icon">
+        <svg width="20" height="20">
+          <use href="#icon-drill"/>
+        </svg>
+      </span>
+      <h4>Power Drill</h4>
+      <p>Available to borrow now.</p>
+    </article>
+
+    <article class="hover-demo-card">
+      <span class="hover-icon">
+        <svg width="20" height="20">
+          <use href="#icon-toolbox"/>
+        </svg>
+      </span>
+      <h4>Toolbox</h4>
+      <p>Available to borrow now.</p>
+    </article>
+
+  </div>
+</section>
 </main>
+```
+
+### Changed
+
+* **“Transforms & Animations” → “Things Available to Borrow Now”**
+* **“Rigging demo” → “Available Now”**
+* Crate-related names → **tools and borrowable items**
+* Added:
+
+  * Hand Tools
+  * Power Drill
+  * Ladder
+  * Toolbox
+  * Hammer
+  * Screwdriver Set
+  * Wrench Set
+  * Measuring Tape
+* Kept your existing **transform, animation, and hover-card structure** intact.
+
+**One important thing:** the icon IDs such as `#icon-tools`, `#icon-drill`, etc. must actually exist in your SVG definitions. If your existing file only has `#icon-crate`, `#icon-pallet`, and `#icon-lock`, tell me what icons you have and I can change the `<use href="">` values without breaking the page.
+
 
 <!-- ============ FOOTER ============ -->
 <footer>
