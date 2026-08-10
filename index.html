@@ -69,7 +69,7 @@
   <!-- ============ HOME / INTRODUCTION ============ -->
   <section id="home" class="crate-strip">
     <span class="eyebrow">Assignment 04</span>
-    <h2>Welcome to the Dispatch Yard</h2>
+    <h2><span class="typing-heading" id="typingHeading">Welcome to the Dispatch Yard</span></h2>
     <article>
       <p class="lede">This page is a working yard for two HTML5 features: <strong>Drag and Drop</strong> and
       <strong>Web Storage</strong>. Crates represent pieces of data. Drag one onto the pallet to see the Drag and
@@ -379,6 +379,78 @@
       <article class="review-card">
         <p class="review-text">"Great community resource — I've borrowed three tools so far this year."</p>
         <p class="review-author">— Priya S.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ TRANSFORMS & ANIMATIONS SHOWCASE ============ -->
+  <section id="transforms-animations">
+    <span class="eyebrow">Rigging demo</span>
+    <h2>Transforms &amp; Animations</h2>
+    <p class="showcase-intro">A quick reference of CSS <code>transform</code> functions and keyframe animations,
+    demonstrated on crate icons and cards. Hover a transform card to trigger it.</p>
+
+    <div class="transform-grid">
+      <article class="transform-card transform-card--translate">
+        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
+        <h4>translate()</h4>
+        <p>Shifts the crate along X and Y — <code>translate(28px, -10px)</code></p>
+      </article>
+      <article class="transform-card transform-card--rotate">
+        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
+        <h4>rotate()</h4>
+        <p>Spins the crate around its centre — <code>rotate(45deg)</code></p>
+      </article>
+      <article class="transform-card transform-card--scale">
+        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
+        <h4>scale()</h4>
+        <p>Grows the crate in place — <code>scale(1.45)</code></p>
+      </article>
+      <article class="transform-card transform-card--skew">
+        <div class="transform-stage"><div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div></div>
+        <h4>skew()</h4>
+        <p>Slants the crate on both axes — <code>skew(-14deg, 6deg)</code></p>
+      </article>
+    </div>
+
+    <div class="animation-grid">
+      <article class="anim-card">
+        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--fade"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
+        <h4>Fade-In</h4>
+        <p>Opacity animates between 0 and 1 on a loop.</p>
+      </article>
+      <article class="anim-card">
+        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--bounce"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
+        <h4>Bounce</h4>
+        <p>Keyframes step the icon up and down like a dropped crate.</p>
+      </article>
+      <article class="anim-card">
+        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--zoom"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
+        <h4>Zoom</h4>
+        <p>Scale pulses larger then back to normal size.</p>
+      </article>
+      <article class="anim-card">
+        <div class="anim-icon-wrap"><div class="anim-icon anim-icon--pulse"><svg width="22" height="22"><use href="#icon-crate"/></svg></div></div>
+        <h4>Pulse</h4>
+        <p>An expanding box-shadow ring, like a radar ping.</p>
+      </article>
+    </div>
+
+    <div class="hover-card-grid">
+      <article class="hover-demo-card">
+        <span class="hover-icon"><svg width="20" height="20"><use href="#icon-crate"/></svg></span>
+        <h4>Card Hover Animation</h4>
+        <p>Hover to lift, tilt and re-tint this card.</p>
+      </article>
+      <article class="hover-demo-card">
+        <span class="hover-icon"><svg width="20" height="20"><use href="#icon-pallet"/></svg></span>
+        <h4>Card Hover Animation</h4>
+        <p>Hover to lift, tilt and re-tint this card.</p>
+      </article>
+      <article class="hover-demo-card">
+        <span class="hover-icon"><svg width="20" height="20"><use href="#icon-lock"/></svg></span>
+        <h4>Card Hover Animation</h4>
+        <p>Hover to lift, tilt and re-tint this card.</p>
       </article>
     </div>
   </section>
