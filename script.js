@@ -378,3 +378,54 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+/* =========================================================
+   APPLIED TO THE REAL APPLICATION
+   (appended only — everything above this is untouched;
+   these listeners wire the demo effects onto real elements)
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------------------------------------------------------
+     13. FADE-IN ON SCROLL — reveals real cards & panels as they enter view
+  --------------------------------------------------------- */
+  const revealTargets = document.querySelectorAll(
+    '.feature-card, .gallery-card, .help-card, .manifest-card, .review-card, .slide-card, .stat-card, .dock-source, .dock-target, .storage-form-card, .storage-readout-card, .contact-info'
+  );
+  if (revealTargets.length) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealTargets.forEach(el => revealObserver.observe(el));
+  }
+
+  /* ---------------------------------------------------------
+     14. BOUNCE — a crate hops back into place once you let go of it
+  --------------------------------------------------------- */
+  document.querySelectorAll('.crate').forEach(crate => {
+    crate.addEventListener('dragend', () => {
+      crate.classList.add('bounce-hop');
+    });
+    crate.addEventListener('animationend', (e) => {
+      if (e.animationName === 'crateHop') crate.classList.remove('bounce-hop');
+    });
+  });
+
+  /* ---------------------------------------------------------
+     15. ZOOM — a Tool Gallery card zooms briefly when you click it
+  --------------------------------------------------------- */
+  document.querySelectorAll('.gallery-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.add('zoom-pick');
+    });
+    card.addEventListener('animationend', (e) => {
+      if (e.animationName === 'toolZoom') card.classList.remove('zoom-pick');
+    });
+  });
+
+});
