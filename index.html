@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dispatch &amp; Locker | HTML5 Drag-Drop and Web Storage Demo</title>
-<meta name="description" content="An interactive demo of HTML5 Drag and Drop, Local Storage and Session Storage, styled as a shipping dispatch yard.">
+<title>Dispatch &amp; Locker | Neighbourhood Tool-Sharing Yard</title>
+<meta name="description" content="A neighbourhood tool-sharing yard, styled as a shipping dispatch dock, with interactive JS event handling.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,11 @@
   <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1110 3.5a7 7 0 0010 11z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></symbol>
   <symbol id="icon-bell" viewBox="0 0 24 24"><path d="M6 10a6 6 0 0112 0c0 4 1.5 5.5 1.5 5.5H4.5S6 14 6 10z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/><path d="M10 18.5a2 2 0 004 0" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/></symbol>
   <symbol id="icon-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-bookmark" viewBox="0 0 24 24"><path d="M6 4h12v16l-6-4-6 4V4z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7V5z" fill="currentColor"/></symbol>
+  <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
 </svg>
 
 <!-- ============ TICKET / TOAST ============ -->
@@ -40,7 +45,7 @@
     <span class="brand-mark"><svg width="26" height="26"><use href="#icon-crate"/></svg></span>
     <div>
       <h1>Dispatch &amp; Locker</h1>
-      <p class="tagline">HTML5 Drag &amp; Drop / Web Storage Yard</p>
+      <p class="tagline">Neighbourhood Tool-Sharing Yard</p>
     </div>
   </div>
   <div class="student-card">
@@ -57,9 +62,14 @@
       <li><a href="#home" class="nav-link active">Home</a></li>
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="#features" class="nav-link">Features</a></li>
+      <li><a href="#tool-gallery" class="nav-link">Tools</a></li>
+      <li><a href="#announcement" class="nav-link">Announcements</a></li>
+      <li><a href="#join" class="nav-link">Join</a></li>
+      <li><a href="#poll" class="nav-link">Poll</a></li>
+      <li><a href="#discussion" class="nav-link">Discussion</a></li>
+      <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
       <li><a href="#storage" class="nav-link">Storage</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
-      <li><a href="#help" class="nav-link">Help</a></li>
     </ul>
   </div>
 </nav>
@@ -71,10 +81,10 @@
     <span class="eyebrow">Assignment 04</span>
     <h2><span class="typing-heading" id="typingHeading">Welcome to the Dispatch Yard</span></h2>
     <article>
-      <p class="lede">This page is a working yard for two HTML5 features: <strong>Drag and Drop</strong> and
-      <strong>Web Storage</strong>. Crates represent pieces of data. Drag one onto the pallet to see the Drag and
-      Drop API in action, then head to the Storage dock to file information into the Long-Term Locker
-      (<code>localStorage</code>) or a Temporary Crate (<code>sessionStorage</code>).</p>
+      <p class="lede">This page is the neighbourhood yard where residents share tools with each other, styled as a
+      shipping dispatch dock. Browse what's on the shelf, request an item, catch the community announcement, join
+      the yard, vote in the neighbourhood poll, and check your dashboard — all built with native HTML5 Drag and
+      Drop, Web Storage, and hands-on JavaScript event handling.</p>
     </article>
   </section>
 
@@ -85,8 +95,8 @@
     <div class="about-grid">
       <article class="manifest-card">
         <h4>Course Outcomes</h4>
-        <p>Design interactive pages with semantic HTML5, implement native Drag and Drop, and persist data with
-        Local and Session Storage — all inside one clean, responsive layout.</p>
+        <p>Design interactive pages with semantic HTML5, implement native Drag and Drop, persist data with Local
+        and Session Storage, and wire up a neighbourhood tool-sharing yard with real JavaScript event handling.</p>
       </article>
       <aside class="manifest-card manifest-aside">
         <h4>How the metaphor maps</h4>
@@ -95,6 +105,7 @@
           <li><strong>Pallet</strong> → the drop target zone</li>
           <li><strong>Long-Term Locker</strong> → <code>localStorage</code></li>
           <li><strong>Temporary Crate</strong> → <code>sessionStorage</code></li>
+          <li><strong>Tool Gallery</strong> → neighbourhood item catalog</li>
         </ul>
       </aside>
     </div>
@@ -331,36 +342,121 @@
     </form>
   </section>
 
-  <!-- ============ TOOL GALLERY ============ -->
+  <!-- ============ TOOL GALLERY (Requirement 1: catalog + Requirement 5: search/filter) ============ -->
   <section id="tool-gallery">
     <span class="eyebrow">On the shelf</span>
     <h2>Tool Gallery</h2>
-    <div class="gallery-grid">
-      <article class="gallery-card">
+    <p class="showcase-intro">Browse what neighbours are sharing right now. Hover a card for details, tap the
+    bookmark to save it, and click <strong>Request</strong> to add it to your requested list.</p>
+
+    <!-- Requirement 5: Search and Filter Bar -->
+    <div class="gallery-toolbar">
+      <div class="search-box">
+        <svg width="16" height="16"><use href="#icon-search"/></svg>
+        <input type="text" id="gallerySearch" placeholder="Search tools&hellip; (press Enter to search)">
+      </div>
+      <select id="galleryCategory">
+        <option value="">All Categories</option>
+        <option value="power">Power Tools</option>
+        <option value="hand">Hand Tools</option>
+        <option value="outdoor">Outdoor &amp; Garden</option>
+      </select>
+      <select id="galleryLocation">
+        <option value="">All Areas</option>
+        <option value="north">North Block</option>
+        <option value="south">South Block</option>
+        <option value="east">East Block</option>
+      </select>
+      <span class="requested-badge">Requested <span id="requestedCount">0</span></span>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <article class="gallery-card" data-name="Cordless Drill" data-category="power" data-location="north">
+        <button type="button" class="bookmark-btn" aria-label="Bookmark Cordless Drill">
+          <svg width="18" height="18"><use href="#icon-bookmark"/></svg>
+        </button>
         <span class="gallery-icon"><svg width="22" height="22"><use href="#icon-crate"/></svg></span>
         <h4>Cordless Drill</h4>
+        <p class="gallery-meta">Power &middot; North Block</p>
+        <button type="button" class="btn btn-teal btn-small request-btn">Request</button>
+        <div class="preview-overlay">
+          <p><strong>Description:</strong> 18V cordless drill, two batteries.</p>
+          <p><strong>Location:</strong> North Block, Unit 4</p>
+          <p><strong>Availability:</strong> Available now</p>
+        </div>
       </article>
-      <article class="gallery-card">
+      <article class="gallery-card" data-name="Extension Ladder" data-category="outdoor" data-location="south">
+        <button type="button" class="bookmark-btn" aria-label="Bookmark Extension Ladder">
+          <svg width="18" height="18"><use href="#icon-bookmark"/></svg>
+        </button>
         <span class="gallery-icon"><svg width="22" height="22"><use href="#icon-pallet"/></svg></span>
         <h4>Extension Ladder</h4>
+        <p class="gallery-meta">Outdoor &middot; South Block</p>
+        <button type="button" class="btn btn-teal btn-small request-btn">Request</button>
+        <div class="preview-overlay">
+          <p><strong>Description:</strong> 6-metre aluminium ladder, non-slip feet.</p>
+          <p><strong>Location:</strong> South Block, Unit 11</p>
+          <p><strong>Availability:</strong> Booked until Friday</p>
+        </div>
       </article>
-      <article class="gallery-card">
+      <article class="gallery-card" data-name="Pressure Washer" data-category="power" data-location="east">
+        <button type="button" class="bookmark-btn" aria-label="Bookmark Pressure Washer">
+          <svg width="18" height="18"><use href="#icon-bookmark"/></svg>
+        </button>
         <span class="gallery-icon"><svg width="22" height="22"><use href="#icon-lock"/></svg></span>
         <h4>Pressure Washer</h4>
+        <p class="gallery-meta">Power &middot; East Block</p>
+        <button type="button" class="btn btn-teal btn-small request-btn">Request</button>
+        <div class="preview-overlay">
+          <p><strong>Description:</strong> Electric, 120 bar, good for driveways.</p>
+          <p><strong>Location:</strong> East Block, Unit 2</p>
+          <p><strong>Availability:</strong> Available from tomorrow</p>
+        </div>
       </article>
-      <article class="gallery-card">
+      <article class="gallery-card" data-name="Circular Saw" data-category="power" data-location="north">
+        <button type="button" class="bookmark-btn" aria-label="Bookmark Circular Saw">
+          <svg width="18" height="18"><use href="#icon-bookmark"/></svg>
+        </button>
         <span class="gallery-icon"><svg width="22" height="22"><use href="#icon-stamp"/></svg></span>
         <h4>Circular Saw</h4>
+        <p class="gallery-meta">Power &middot; North Block</p>
+        <button type="button" class="btn btn-teal btn-small request-btn">Request</button>
+        <div class="preview-overlay">
+          <p><strong>Description:</strong> 7-&frac14; inch blade, safety guard included.</p>
+          <p><strong>Location:</strong> North Block, Unit 7</p>
+          <p><strong>Availability:</strong> Available now</p>
+        </div>
       </article>
-      <article class="gallery-card">
+      <article class="gallery-card" data-name="Wet/Dry Vacuum" data-category="hand" data-location="south">
+        <button type="button" class="bookmark-btn" aria-label="Bookmark Wet/Dry Vacuum">
+          <svg width="18" height="18"><use href="#icon-bookmark"/></svg>
+        </button>
         <span class="gallery-icon"><svg width="22" height="22"><use href="#icon-clock"/></svg></span>
         <h4>Wet/Dry Vacuum</h4>
+        <p class="gallery-meta">Hand Tool &middot; South Block</p>
+        <button type="button" class="btn btn-teal btn-small request-btn">Request</button>
+        <div class="preview-overlay">
+          <p><strong>Description:</strong> Wet and dry shop vacuum, 20L tank.</p>
+          <p><strong>Location:</strong> South Block, Unit 3</p>
+          <p><strong>Availability:</strong> Available now</p>
+        </div>
       </article>
-      <article class="gallery-card">
+      <article class="gallery-card" data-name="Staple Gun" data-category="hand" data-location="east">
+        <button type="button" class="bookmark-btn" aria-label="Bookmark Staple Gun">
+          <svg width="18" height="18"><use href="#icon-bookmark"/></svg>
+        </button>
         <span class="gallery-icon"><svg width="22" height="22"><use href="#icon-mail"/></svg></span>
         <h4>Staple Gun</h4>
+        <p class="gallery-meta">Hand Tool &middot; East Block</p>
+        <button type="button" class="btn btn-teal btn-small request-btn">Request</button>
+        <div class="preview-overlay">
+          <p><strong>Description:</strong> Heavy-duty manual staple gun.</p>
+          <p><strong>Location:</strong> East Block, Unit 9</p>
+          <p><strong>Availability:</strong> Available now</p>
+        </div>
       </article>
     </div>
+    <p class="gallery-empty" id="galleryEmpty" hidden>No tools match your search yet — try a different keyword or filter.</p>
   </section>
 
   <!-- ============ MEMBER REVIEWS ============ -->
@@ -383,178 +479,226 @@
     </div>
   </section>
 
+  <!-- ============ COMMUNITY ANNOUNCEMENT / VIDEO (Requirement 2) ============ -->
+  <section id="announcement">
+    <span class="eyebrow">Notice board</span>
+    <h2>Community Announcement</h2>
+    <p class="showcase-intro">A short clip from the yard supervisor on this month's sharing guidelines.</p>
+    <div class="video-card">
+      <video id="announceVideo" class="announce-video" poster="" preload="metadata" playsinline>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        Your browser does not support embedded video.
+      </video>
+      <div class="video-controls">
+        <button type="button" class="video-btn" id="videoPlayBtn" aria-label="Play or pause">
+          <svg width="18" height="18"><use href="#icon-play" id="videoPlayIcon"/></svg>
+        </button>
+        <div class="video-progress-wrap" id="videoProgressWrap">
+          <div class="video-progress-fill" id="videoProgressFill"></div>
+        </div>
+        <span class="video-time" id="videoTime">0:00</span>
+        <label class="video-volume-label">
+          Vol
+          <input type="range" id="videoVolume" min="0" max="1" step="0.05" value="1">
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMUNITY REGISTRATION / JOIN FORM (Requirement 3) ============ -->
+  <section id="join">
+    <span class="eyebrow">Sign the manifest</span>
+    <h2>Join the Neighbourhood Yard</h2>
+    <form id="joinForm" class="borrow-form" novalidate>
+      <div class="form-grid">
+        <div>
+          <label for="joinName">Name</label>
+          <input type="text" id="joinName" placeholder="Your full name">
+          <span class="field-error" id="joinNameError"></span>
+        </div>
+        <div>
+          <label for="joinEmail">Email</label>
+          <input type="email" id="joinEmail" placeholder="you@example.com">
+          <span class="field-error" id="joinEmailError"></span>
+        </div>
+        <div>
+          <label for="joinPassword">Password</label>
+          <input type="password" id="joinPassword" placeholder="At least 6 characters">
+          <span class="field-error" id="joinPasswordError"></span>
+        </div>
+        <div>
+          <label for="joinConfirm">Confirm Password</label>
+          <input type="password" id="joinConfirm" placeholder="Re-enter password">
+          <span class="field-error" id="joinConfirmError"></span>
+        </div>
+        <div>
+          <label for="joinArea">Area / Locality</label>
+          <input type="text" id="joinArea" placeholder="e.g. North Block">
+          <span class="field-error" id="joinAreaError"></span>
+        </div>
+        <div>
+          <label for="joinInterest">Community Interest</label>
+          <select id="joinInterest">
+            <option value="">Choose one</option>
+            <option value="tools">Tool Sharing</option>
+            <option value="events">Neighbourhood Events</option>
+            <option value="volunteering">Volunteering</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <svg width="16" height="16"><use href="#icon-stamp"/></svg> Join the Yard
+      </button>
+      <p class="form-success" id="joinSuccess" hidden>You're on the manifest! Welcome to the yard.</p>
+    </form>
+  </section>
+
+  <!-- ============ NEIGHBOURHOOD POLL (Requirement 4) ============ -->
+  <section id="poll">
+    <span class="eyebrow">Vote of the dock</span>
+    <h2>Neighbourhood Poll</h2>
+    <div class="poll-card">
+      <h4 id="pollQuestion">Which community activity should be organized next?</h4>
+      <form id="pollForm">
+        <label class="poll-option"><input type="radio" name="pollChoice" value="Tool swap meet"> Tool swap meet</label>
+        <label class="poll-option"><input type="radio" name="pollChoice" value="Weekend cleanup drive"> Weekend cleanup drive</label>
+        <label class="poll-option"><input type="radio" name="pollChoice" value="DIY repair workshop"> DIY repair workshop</label>
+        <label class="poll-option"><input type="radio" name="pollChoice" value="Garden sharing day"> Garden sharing day</label>
+      </form>
+      <div class="poll-controls">
+        <button type="button" class="btn btn-secondary" id="pollStartBtn">Start Poll</button>
+        <button type="button" class="btn btn-primary" id="pollSubmitBtn" disabled>Submit Poll</button>
+        <span class="poll-timer" id="pollTimer">--</span>
+      </div>
+      <p class="poll-result" id="pollResult" hidden></p>
+    </div>
+  </section>
+
+  <!-- ============ DISCUSSION / COMMENTS (Requirement 6) ============ -->
+  <section id="discussion">
+    <span class="eyebrow">Notice board chatter</span>
+    <h2>Discussion</h2>
+    <p class="showcase-intro">Ask a question about a tool, or reply to a neighbour. Double-click your own comment
+    to edit it.</p>
+    <form id="commentForm" class="comment-form">
+      <input type="text" id="commentName" placeholder="Your name" required>
+      <textarea id="commentText" rows="2" placeholder="Post a comment or question&hellip;" required></textarea>
+      <button type="submit" class="btn btn-teal btn-small">Post Comment</button>
+    </form>
+    <div class="comments-list" id="commentsList">
+      <article class="comment" data-author="Ariana K.">
+        <p class="comment-meta"><strong>Ariana K.</strong> <span class="comment-time">2 days ago</span></p>
+        <p class="comment-text">Is the pressure washer still available this weekend?</p>
+        <div class="comment-actions">
+          <button type="button" class="link-btn reply-btn">Reply</button>
+        </div>
+        <div class="replies"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ NEIGHBOURHOOD DASHBOARD (Requirement 7) ============ -->
+  <section id="dashboard">
+    <span class="eyebrow">Your ledger</span>
+    <h2>Neighbourhood Dashboard</h2>
+    <div class="dashboard-grid">
+      <article class="activity-card" data-activity="tool-sharing">
+        <span class="gallery-icon"><svg width="20" height="20"><use href="#icon-crate"/></svg></span>
+        <h4>Tool Sharing</h4>
+        <p>3 items requested this month</p>
+      </article>
+      <article class="activity-card" data-activity="cleanup">
+        <span class="gallery-icon"><svg width="20" height="20"><use href="#icon-pallet"/></svg></span>
+        <h4>Cleanup Drives</h4>
+        <p>1 event joined</p>
+      </article>
+      <article class="activity-card" data-activity="volunteering">
+        <span class="gallery-icon"><svg width="20" height="20"><use href="#icon-lock"/></svg></span>
+        <h4>Volunteering</h4>
+        <p>2 tasks completed</p>
+      </article>
+    </div>
+    <div class="activity-detail" id="activityDetail" hidden></div>
+
+    <div class="progress-block">
+      <h4>Community Participation
+        <span class="progress-percent" id="progressPercent">25% Complete</span>
+      </h4>
+      <div class="progress-bar-wrap" id="progressBarWrap">
+        <div class="progress-bar-fill" id="progressBarFill" style="width:25%"></div>
+        <div class="progress-tooltip" id="progressTooltip"></div>
+      </div>
+    </div>
+
+    <ul class="task-list" id="taskList">
+      <li><label><input type="checkbox" class="task-check" data-weight="25"> Return the borrowed drill on time</label></li>
+      <li><label><input type="checkbox" class="task-check" data-weight="25" checked> Attend the neighbourhood meeting</label></li>
+      <li><label><input type="checkbox" class="task-check" data-weight="25"> Post a tool for sharing</label></li>
+      <li><label><input type="checkbox" class="task-check" data-weight="25"> Volunteer for the cleanup drive</label></li>
+    </ul>
+  </section>
+
+  <!-- ============ HELP FOR EVENTS ============ -->
+  <section id="help2" class="help-events">
+    <span class="eyebrow">Need a hand</span>
+    <h2>How the Interactions Work</h2>
+    <div class="help-grid">
+      <article class="help-card">
+        <span class="help-icon"><svg width="18" height="18"><use href="#icon-question"/></svg></span>
+        <h4>Where's the event delegation?</h4>
+        <p>The Discussion section attaches one listener to the comments list, so newly created Reply buttons and
+        comments work without extra listeners.</p>
+      </article>
+      <article class="help-card">
+        <span class="help-icon"><svg width="18" height="18"><use href="#icon-question"/></svg></span>
+        <h4>How does the poll timer work?</h4>
+        <p>Starting the poll begins a <code>setInterval()</code> countdown. When it hits zero the poll
+        auto-submits and locks.</p>
+      </article>
+    </div>
+  </section>
+
   <!-- ============ TRANSFORMS & ANIMATIONS SHOWCASE ============ -->
- ```html
-<section id="things-to-borrow">
-  <span class="eyebrow">Available Now</span>
-
-  <h2>Things Available to Borrow Now</h2>
-
-  <p class="showcase-intro">
-    Browse tools and useful items that are currently available to borrow.
-    Hover over an item to see its animation.
-  </p>
-
-  <div class="transform-grid">
-
-    <article class="transform-card transform-card--translate">
-      <div class="transform-stage">
-        <div class="transform-crate">
-          <svg width="26" height="26">
-            <use href="#icon-tools"/>
-          </svg>
+  <section id="things-to-borrow">
+    <span class="eyebrow">Available Now</span>
+    <h2>Things Available to Borrow Now</h2>
+    <p class="showcase-intro">
+      Browse tools and useful items that are currently available to borrow.
+      Hover over an item to see its animation.
+    </p>
+    <div class="transform-grid">
+      <article class="transform-card transform-card--translate">
+        <div class="transform-stage">
+          <div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div>
         </div>
-      </div>
-      <h4>Hand Tools</h4>
-      <p>Hammers, screwdrivers and other basic tools available for borrowing.</p>
-    </article>
-
-    <article class="transform-card transform-card--rotate">
-      <div class="transform-stage">
-        <div class="transform-crate">
-          <svg width="26" height="26">
-            <use href="#icon-drill"/>
-          </svg>
+        <h4>Hand Tools</h4>
+        <p>Hammers, screwdrivers and other basic tools available for borrowing.</p>
+      </article>
+      <article class="transform-card transform-card--rotate">
+        <div class="transform-stage">
+          <div class="transform-crate"><svg width="26" height="26"><use href="#icon-crate"/></svg></div>
         </div>
-      </div>
-      <h4>Power Drill</h4>
-      <p>Borrow a power drill for drilling and basic DIY work.</p>
-    </article>
-
-    <article class="transform-card transform-card--scale">
-      <div class="transform-stage">
-        <div class="transform-crate">
-          <svg width="26" height="26">
-            <use href="#icon-ladder"/>
-          </svg>
+        <h4>Power Drill</h4>
+        <p>Borrow a power drill for drilling and basic DIY work.</p>
+      </article>
+      <article class="transform-card transform-card--scale">
+        <div class="transform-stage">
+          <div class="transform-crate"><svg width="26" height="26"><use href="#icon-pallet"/></svg></div>
         </div>
-      </div>
-      <h4>Ladder</h4>
-      <p>A sturdy ladder available for short-term household or maintenance work.</p>
-    </article>
-
-    <article class="transform-card transform-card--skew">
-      <div class="transform-stage">
-        <div class="transform-crate">
-          <svg width="26" height="26">
-            <use href="#icon-toolbox"/>
-          </svg>
+        <h4>Ladder</h4>
+        <p>A sturdy ladder available for short-term household or maintenance work.</p>
+      </article>
+      <article class="transform-card transform-card--skew">
+        <div class="transform-stage">
+          <div class="transform-crate"><svg width="26" height="26"><use href="#icon-lock"/></svg></div>
         </div>
-      </div>
-      <h4>Toolbox</h4>
-      <p>A complete toolbox with essential tools ready to borrow.</p>
-    </article>
+        <h4>Toolbox</h4>
+        <p>A complete toolbox with essential tools ready to borrow.</p>
+      </article>
+    </div>
+  </section>
 
-  </div>
-
-  <div class="animation-grid">
-
-    <article class="anim-card">
-      <div class="anim-icon-wrap">
-        <div class="anim-icon anim-icon--fade">
-          <svg width="22" height="22">
-            <use href="#icon-hammer"/>
-          </svg>
-        </div>
-      </div>
-      <h4>Hammer</h4>
-      <p>Available now for basic repair, construction and DIY tasks.</p>
-    </article>
-
-    <article class="anim-card">
-      <div class="anim-icon-wrap">
-        <div class="anim-icon anim-icon--bounce">
-          <svg width="22" height="22">
-            <use href="#icon-screwdriver"/>
-          </svg>
-        </div>
-      </div>
-      <h4>Screwdriver Set</h4>
-      <p>A set of screwdrivers available for borrowing.</p>
-    </article>
-
-    <article class="anim-card">
-      <div class="anim-icon-wrap">
-        <div class="anim-icon anim-icon--zoom">
-          <svg width="22" height="22">
-            <use href="#icon-wrench"/>
-          </svg>
-        </div>
-      </div>
-      <h4>Wrench Set</h4>
-      <p>Useful for tightening and loosening nuts and bolts.</p>
-    </article>
-
-    <article class="anim-card">
-      <div class="anim-icon-wrap">
-        <div class="anim-icon anim-icon--pulse">
-          <svg width="22" height="22">
-            <use href="#icon-measuring-tape"/>
-          </svg>
-        </div>
-      </div>
-      <h4>Measuring Tape</h4>
-      <p>Available for measuring furniture, rooms and project materials.</p>
-    </article>
-
-  </div>
-
-  <div class="hover-card-grid">
-
-    <article class="hover-demo-card">
-      <span class="hover-icon">
-        <svg width="20" height="20">
-          <use href="#icon-hammer"/>
-        </svg>
-      </span>
-      <h4>Hammer</h4>
-      <p>Available to borrow now.</p>
-    </article>
-
-    <article class="hover-demo-card">
-      <span class="hover-icon">
-        <svg width="20" height="20">
-          <use href="#icon-drill"/>
-        </svg>
-      </span>
-      <h4>Power Drill</h4>
-      <p>Available to borrow now.</p>
-    </article>
-
-    <article class="hover-demo-card">
-      <span class="hover-icon">
-        <svg width="20" height="20">
-          <use href="#icon-toolbox"/>
-        </svg>
-      </span>
-      <h4>Toolbox</h4>
-      <p>Available to borrow now.</p>
-    </article>
-
-  </div>
-</section>
 </main>
-```
-
-### Changed
-
-* **“Transforms & Animations” → “Things Available to Borrow Now”**
-* **“Rigging demo” → “Available Now”**
-* Crate-related names → **tools and borrowable items**
-* Added:
-
-  * Hand Tools
-  * Power Drill
-  * Ladder
-  * Toolbox
-  * Hammer
-  * Screwdriver Set
-  * Wrench Set
-  * Measuring Tape
-* Kept your existing **transform, animation, and hover-card structure** intact.
-
-**One important thing:** the icon IDs such as `#icon-tools`, `#icon-drill`, etc. must actually exist in your SVG definitions. If your existing file only has `#icon-crate`, `#icon-pallet`, and `#icon-lock`, tell me what icons you have and I can change the `<use href="">` values without breaking the page.
-
 
 <!-- ============ FOOTER ============ -->
 <footer>
