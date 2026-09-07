@@ -128,12 +128,12 @@ nav { background: var(--crate-orange); position: sticky; top: 0; z-index: 50; bo
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; max-width: 1180px; margin: 0 auto; }
 nav ul { display: flex; list-style: none; flex-wrap: wrap; }
 .nav-link {
-  display: block; padding: 13px 18px; color: #fff; text-decoration: none;
-  font-family: var(--font-display); font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase;
+  display: block; padding: 13px 16px; color: #fff; text-decoration: none;
+  font-family: var(--font-display); font-size: 13.5px; letter-spacing: 0.03em; text-transform: uppercase;
   position: relative; transition: background 0.25s ease;
 }
 .nav-link::after {
-  content: ''; position: absolute; left: 18px; right: 18px; bottom: 5px; height: 2px;
+  content: ''; position: absolute; left: 16px; right: 16px; bottom: 5px; height: 2px;
   background: var(--ink); transform: scaleX(0); transition: transform 0.25s ease; transform-origin: left;
 }
 .nav-link:hover { background: var(--crate-orange-dark); }
@@ -247,11 +247,11 @@ nav ul { display: flex; list-style: none; flex-wrap: wrap; }
 .storage-form-card h4, .storage-readout-card h4 { font-size: 15px; margin-bottom: 12px; }
 
 form label { display: block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--ink); }
-form input {
+form input, form textarea, form select {
   width: 100%; padding: 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: var(--radius-sm);
   font-size: 14px; background: var(--paper); color: var(--ink); font-family: var(--font-body);
 }
-form input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(62,124,116,0.15); }
+form input:focus, form textarea:focus, form select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(62,124,116,0.15); }
 
 .btn-row { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
 .btn {
@@ -269,6 +269,8 @@ form input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3
 .btn-secondary { background: var(--paper); color: var(--ink); border: 1px solid var(--border); }
 .btn-danger { background: var(--stamp-red); color: #fff; }
 .btn-danger:hover { background: #832d21; }
+.btn-small { padding: 7px 14px; font-size: 12.5px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .readout {
   min-height: 110px; border: 1px dashed var(--border); border-radius: var(--radius-sm);
@@ -321,7 +323,7 @@ footer p { margin: 3px 0; }
     flex-direction: column; width: 100%; max-height: 0; overflow: hidden;
     transition: max-height 0.35s ease;
   }
-  #navMenu.open { max-height: 320px; }
+  #navMenu.open { max-height: 420px; overflow-y: auto; }
   header { flex-direction: column; align-items: flex-start; }
   .student-card { text-align: left; }
 }
@@ -369,22 +371,67 @@ footer p { margin: 3px 0; }
 .borrow-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
 .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 18px; }
 .borrow-form label { display: block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--ink); }
-.borrow-form input, .borrow-form textarea {
+.borrow-form input, .borrow-form textarea, .borrow-form select {
   width: 100%; padding: 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: var(--radius-sm);
   font-size: 14px; background: var(--paper); color: var(--ink); font-family: var(--font-body); resize: vertical;
 }
-.borrow-form input:focus, .borrow-form textarea:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(62,124,116,0.15); }
+.borrow-form input:focus, .borrow-form textarea:focus, .borrow-form select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(62,124,116,0.15); }
 .borrow-form button { margin-top: 18px; }
 
 /* ---------- Tool Gallery ---------- */
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.gallery-toolbar {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px; margin-bottom: 18px; box-shadow: var(--shadow);
+}
+.search-box {
+  display: flex; align-items: center; gap: 8px; flex: 1 1 220px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; background: var(--paper);
+}
+.search-box svg { color: var(--ink-soft); flex-shrink: 0; }
+.search-box input { border: none; background: transparent; padding: 0; margin: 0; font-size: 13.5px; flex: 1; }
+.search-box input:focus { outline: none; box-shadow: none; }
+.gallery-toolbar select {
+  padding: 9px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--paper); color: var(--ink); font-size: 13.5px; font-family: var(--font-body);
+}
+.requested-badge {
+  margin-left: auto; font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft);
+  background: var(--paper); border: 1px dashed var(--border); padding: 6px 12px; border-radius: 20px;
+}
+.requested-badge span { color: var(--crate-orange-dark); font-weight: 700; }
+
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
 .gallery-card {
+  position: relative;
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 18px; text-align: center; box-shadow: var(--shadow); transition: transform 0.2s ease;
+  overflow: hidden;
 }
 .gallery-card:hover { transform: translateY(-3px); }
 .gallery-icon { display: inline-flex; color: #fff; background: var(--teal); padding: 9px; border-radius: 8px; margin-bottom: 8px; }
 .gallery-card h4 { font-size: 13.5px; }
+.gallery-meta { font-size: 11.5px; color: var(--ink-soft); margin: 4px 0 10px; }
+.gallery-card[hidden] { display: none; }
+.gallery-empty { text-align: center; color: var(--ink-soft); font-style: italic; font-size: 13.5px; margin-top: 16px; }
+
+.bookmark-btn {
+  position: absolute; top: 10px; right: 10px; background: var(--paper); border: 1px solid var(--border);
+  border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  color: var(--ink-soft); cursor: pointer; transition: color 0.2s ease, transform 0.2s ease;
+}
+.bookmark-btn:hover { transform: scale(1.08); }
+.bookmark-btn.saved { color: var(--crate-orange); }
+.bookmark-btn.saved svg { fill: var(--crate-orange); }
+
+.preview-overlay {
+  position: absolute; inset: 0; background: rgba(27,42,65,0.94); color: #f2f4f8;
+  padding: 16px; text-align: left; font-size: 12px; display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  opacity: 0; visibility: hidden; transform: translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+}
+.preview-overlay.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.preview-overlay strong { color: #fff; }
 
 /* ---------- Member Reviews ---------- */
 .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
@@ -394,6 +441,112 @@ footer p { margin: 3px 0; }
 }
 .review-text { font-size: 13.5px; color: var(--ink-soft); font-style: italic; margin-bottom: 10px; }
 .review-author { font-size: 13px; font-weight: 600; color: var(--crate-orange-dark); }
+
+/* ---------- Community Announcement / Video ---------- */
+.video-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); max-width: 640px; }
+.announce-video { width: 100%; border-radius: var(--radius-sm); background: #000; display: block; }
+.video-controls { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.video-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--crate-orange); color: #fff; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease;
+}
+.video-btn:hover { background: var(--crate-orange-dark); }
+.video-progress-wrap {
+  flex: 1; height: 8px; border-radius: 6px; background: var(--paper); border: 1px solid var(--border);
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.video-progress-fill { height: 100%; width: 0%; background: var(--teal); }
+.video-time { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); min-width: 38px; }
+.video-volume-label { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--ink-soft); }
+.video-volume-label input[type="range"] { width: 80px; }
+
+/* ---------- Join / Registration Form ---------- */
+.field-error { display: block; font-size: 11.5px; color: var(--stamp-red); margin-top: 4px; min-height: 14px; }
+.field-error.success { color: var(--teal-dark); }
+.borrow-form input.invalid { border-color: var(--stamp-red); box-shadow: 0 0 0 3px rgba(162,60,46,0.12); }
+.borrow-form input.valid { border-color: var(--teal); }
+.form-success {
+  margin-top: 14px; background: rgba(62,124,116,0.12); border: 1px solid var(--teal); color: var(--teal-dark);
+  padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600;
+}
+
+/* ---------- Neighbourhood Poll ---------- */
+.poll-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); max-width: 560px; }
+.poll-card h4 { font-size: 15.5px; margin-bottom: 14px; }
+.poll-option { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--ink-soft); padding: 8px 0; border-bottom: 1px dashed var(--border); cursor: pointer; }
+.poll-option:last-of-type { border-bottom: none; }
+.poll-option input { width: auto; margin: 0; }
+.poll-controls { display: flex; align-items: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.poll-timer { font-family: var(--font-mono); font-size: 13px; color: var(--stamp-red); font-weight: 700; }
+.poll-result {
+  margin-top: 14px; background: var(--paper); border: 1px dashed var(--border); border-radius: var(--radius-sm);
+  padding: 10px 14px; font-size: 13.5px; color: var(--ink);
+}
+
+/* ---------- Discussion / Comments ---------- */
+.comment-form { display: flex; flex-direction: column; gap: 8px; max-width: 560px; margin-bottom: 20px; }
+.comment-form input, .comment-form textarea {
+  padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13.5px;
+  background: var(--surface); color: var(--ink); font-family: var(--font-body); resize: vertical;
+}
+.comment-form input:focus, .comment-form textarea:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(62,124,116,0.15); }
+.comment-form button { align-self: flex-start; }
+
+.comments-list { display: flex; flex-direction: column; gap: 14px; }
+.comment {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 16px; box-shadow: var(--shadow);
+}
+.comment-meta { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 4px; }
+.comment-time { font-family: var(--font-mono); font-size: 11px; }
+.comment-text { font-size: 13.5px; color: var(--ink); }
+.comment-text[contenteditable="true"] { outline: 2px dashed var(--teal); border-radius: 4px; padding: 4px; background: var(--paper); }
+.comment-actions { margin-top: 8px; display: flex; gap: 12px; }
+.link-btn { background: none; border: none; color: var(--teal-dark); font-size: 12.5px; font-weight: 600; cursor: pointer; padding: 0; }
+.link-btn:hover { text-decoration: underline; }
+.replies { margin-top: 10px; padding-left: 16px; border-left: 2px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
+.reply { font-size: 13px; }
+.reply .comment-meta { font-size: 11.5px; }
+.reply-input-wrap { display: flex; gap: 8px; margin-top: 10px; }
+.reply-input-wrap input {
+  flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px;
+  background: var(--paper); color: var(--ink); font-family: var(--font-body);
+}
+
+/* ---------- Neighbourhood Dashboard ---------- */
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 8px; }
+.activity-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px; box-shadow: var(--shadow); cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.activity-card:hover { transform: translateY(-3px); border-color: var(--teal); }
+.activity-card h4 { font-size: 14px; margin: 6px 0 4px; }
+.activity-card p { font-size: 12.5px; color: var(--ink-soft); }
+.activity-detail {
+  background: var(--paper); border: 1px dashed var(--border); border-radius: var(--radius-sm);
+  padding: 14px 16px; margin-bottom: 24px; font-size: 13.5px; color: var(--ink-soft);
+}
+
+.progress-block { margin-top: 8px; margin-bottom: 20px; }
+.progress-block h4 { font-size: 14.5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.progress-percent { font-family: var(--font-mono); font-size: 12.5px; color: var(--crate-orange-dark); }
+.progress-bar-wrap {
+  position: relative; height: 16px; border-radius: 10px; background: var(--paper); border: 1px solid var(--border); overflow: visible;
+}
+.progress-bar-fill { height: 100%; border-radius: 10px; background: var(--teal); transition: width 0.4s ease; }
+.progress-tooltip {
+  position: absolute; bottom: 24px; left: 0; transform: translateX(-50%);
+  background: var(--ink); color: #fff; font-size: 11.5px; padding: 5px 10px; border-radius: 6px;
+  white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity 0.15s ease;
+  font-family: var(--font-mono);
+}
+.progress-tooltip.show { opacity: 1; visibility: visible; }
+
+.task-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.task-list li { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13.5px; }
+.task-list label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.task-list input[type="checkbox"] { width: auto; margin: 0; }
 
 /* ---------- Floating Utility Widgets: Current Date & Time / Theme Switcher / Notifications ---------- */
 .utility-stack {
@@ -454,13 +607,10 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
 }
 
 /* =========================================================
-   TRANSFORMS & ANIMATIONS SHOWCASE (new section — nothing above changed)
+   TRANSFORMS & ANIMATIONS SHOWCASE
    ========================================================= */
-
-/* ---------- Section intro ---------- */
 .showcase-intro { font-size: 13.5px; color: var(--ink-soft); max-width: 640px; margin-bottom: 22px; }
 
-/* ---------- Transform Demo Grid (translate / rotate / scale / skew) ---------- */
 .transform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; }
 .transform-card {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
@@ -481,54 +631,12 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-/* Hovering the card triggers each named transform on its crate */
 .transform-card--translate:hover .transform-crate { transform: translate(28px, -10px); }
 .transform-card--rotate:hover .transform-crate { transform: rotate(45deg); }
 .transform-card--scale:hover .transform-crate { transform: scale(1.45); }
 .transform-card--skew:hover .transform-crate { transform: skew(-14deg, 6deg); }
 .transform-card h4 { font-size: 14px; }
 .transform-card p { font-size: 12.5px; color: var(--ink-soft); }
-.transform-card code { font-size: 11.5px; }
-
-/* ---------- Animation Demo Grid (Fade-In / Bounce / Zoom / Pulse) ---------- */
-.animation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin-top: 24px; }
-.anim-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 22px; text-align: center; box-shadow: var(--shadow);
-  display: flex; flex-direction: column; align-items: center; gap: 14px;
-}
-.anim-card h4 { font-size: 14px; }
-.anim-card p { font-size: 12.5px; color: var(--ink-soft); }
-.anim-icon-wrap {
-  width: 100%; height: 90px; display: flex; align-items: center; justify-content: center;
-  border: 1px dashed var(--border); border-radius: var(--radius-sm);
-}
-.anim-icon {
-  width: 46px; height: 46px; border-radius: 8px; background: var(--teal); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-}
-
-@keyframes fadeInDemo { from { opacity: 0; } to { opacity: 1; } }
-@keyframes bounceDemo {
-  0%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-18px); }
-  50% { transform: translateY(0); }
-  70% { transform: translateY(-9px); }
-  85% { transform: translateY(0); }
-}
-@keyframes zoomDemo {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.35); }
-}
-@keyframes pulseDemo {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(62,124,116,0.55); }
-  70% { box-shadow: 0 0 0 14px rgba(62,124,116,0); }
-}
-
-.anim-icon--fade { animation: fadeInDemo 1.6s ease-in-out infinite alternate; }
-.anim-icon--bounce { animation: bounceDemo 1.8s ease infinite; background: var(--crate-orange); }
-.anim-icon--zoom { animation: zoomDemo 1.8s ease-in-out infinite; background: var(--stamp-red); }
-.anim-icon--pulse { animation: pulseDemo 1.8s ease-out infinite; background: var(--teal); }
 
 /* ---------- Typing Effect heading ---------- */
 .typing-heading {
@@ -544,41 +652,17 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
 @keyframes typingDemo { from { width: 0; } to { width: 28ch; } }
 @keyframes caretBlink { 50% { border-color: transparent; } }
 
-/* ---------- Card Hover Animation showcase ---------- */
-.hover-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-top: 24px; }
-.hover-demo-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 22px; text-align: center; box-shadow: var(--shadow);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-}
-.hover-demo-card:hover {
-  transform: translateY(-8px) scale(1.035) rotate(-0.6deg);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--teal);
-}
-.hover-demo-card .hover-icon {
-  display: inline-flex; color: #fff; background: var(--crate-orange); padding: 10px; border-radius: 10px;
-  margin-bottom: 10px; transition: transform 0.35s ease, background 0.35s ease;
-}
-.hover-demo-card:hover .hover-icon { transform: rotate(12deg) scale(1.1); background: var(--teal); }
-.hover-demo-card h4 { font-size: 14px; margin-bottom: 4px; }
-.hover-demo-card p { font-size: 12.5px; color: var(--ink-soft); }
-
 @media (max-width: 760px) {
-  .typing-heading { white-space: normal; border-right: none; animation: fadeInDemo 1s ease both; max-width: 100%; }
+  .typing-heading { white-space: normal; border-right: none; animation: none; max-width: 100%; }
 }
 
 /* =========================================================
-   APPLIED TO THE REAL APPLICATION
-   (appended only — every rule above this line is untouched;
-   these rules extend the actual site's cards, icons and buttons
-   with the same transform/animation techniques from the demo)
+   FADE-IN + HOVER LIFT on real cards
    ========================================================= */
-
-/* ---------- Fade-In: real cards & panels reveal as you scroll to them ---------- */
 .feature-card, .gallery-card, .help-card, .manifest-card, .review-card,
 .slide-card, .stat-card, .dock-source, .dock-target,
-.storage-form-card, .storage-readout-card, .contact-info {
+.storage-form-card, .storage-readout-card, .contact-info,
+.activity-card, .comment, .poll-card, .video-card {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -586,12 +670,12 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
 .feature-card.is-revealed, .gallery-card.is-revealed, .help-card.is-revealed,
 .manifest-card.is-revealed, .review-card.is-revealed, .slide-card.is-revealed,
 .stat-card.is-revealed, .dock-source.is-revealed, .dock-target.is-revealed,
-.storage-form-card.is-revealed, .storage-readout-card.is-revealed, .contact-info.is-revealed {
+.storage-form-card.is-revealed, .storage-readout-card.is-revealed, .contact-info.is-revealed,
+.activity-card.is-revealed, .comment.is-revealed, .poll-card.is-revealed, .video-card.is-revealed {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ---------- Card Hover Animation: lift + scale + tilt on the real cards ---------- */
 .feature-card:hover, .gallery-card:hover, .help-card:hover, .manifest-card:hover,
 .review-card:hover, .slide-card:hover, .stat-card:hover {
   transform: translateY(-8px) scale(1.025) rotate(-0.5deg);
@@ -599,28 +683,18 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
   border-color: var(--teal);
 }
 
-/* ---------- rotate(): real icons tilt when their card is hovered ---------- */
-.feature-icon, .gallery-icon, .help-icon, .slide-icon {
-  transition: transform 0.35s ease, background 0.3s ease;
-}
+.feature-icon, .gallery-icon, .help-icon, .slide-icon { transition: transform 0.35s ease, background 0.3s ease; }
 .feature-card:hover .feature-icon,
 .gallery-card:hover .gallery-icon,
 .help-card:hover .help-icon,
-.slide-card:hover .slide-icon {
-  transform: rotate(10deg) scale(1.12);
-}
+.slide-card:hover .slide-icon { transform: rotate(10deg) scale(1.12); }
 
-/* ---------- skew(): eyebrow tags get a stamp-like wobble on hover ---------- */
 .eyebrow { transition: transform 0.3s ease; }
 .eyebrow:hover { transform: rotate(-1.2deg) skew(-8deg, 3deg); }
 
-/* ---------- translate(): Back to Top lifts further on hover ---------- */
 .back-to-top:hover { transform: translateY(-6px); }
-
-/* ---------- scale(): a crate shrinks slightly while it's being picked up ---------- */
 .crate.dragging { transform: scale(0.92); }
 
-/* ---------- Bounce: the crate hops back into place once you let go ---------- */
 @keyframes crateHop {
   0%, 100% { transform: translateY(0); }
   30% { transform: translateY(-14px); }
@@ -630,7 +704,6 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
 }
 .crate.bounce-hop { animation: crateHop 0.7s ease; }
 
-/* ---------- Zoom: a Tool Gallery card zooms briefly when you pick it ---------- */
 @keyframes toolZoom {
   0% { transform: scale(1); }
   50% { transform: scale(1.18); }
@@ -638,7 +711,6 @@ body.theme-dark code { background: rgba(255,255,255,0.08); }
 }
 .gallery-card.zoom-pick { animation: toolZoom 0.45s ease; }
 
-/* ---------- Pulse: the real Submit Request button calls for attention ---------- */
 @keyframes ctaPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(212, 106, 42, 0.5); }
   70% { box-shadow: 0 0 0 13px rgba(212, 106, 42, 0); }
